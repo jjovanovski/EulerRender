@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\math\Mat4.h" />
     <ClInclude Include="src\scene\Component.h" />
     <ClInclude Include="src\scene\Scene.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="src\math\Vec2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\math\Mat4.cpp" />
     <ClCompile Include="src\scene\Component.cpp" />
     <ClCompile Include="src\scene\Scene.cpp" />
