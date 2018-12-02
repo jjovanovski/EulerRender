@@ -18,6 +18,9 @@ Application::Application(int width, int height, const char* title) {
 
 	glfwMakeContextCurrent(window);
 	gladLoadGL();
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 }
 
 Application::~Application() {

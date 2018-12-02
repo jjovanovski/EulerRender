@@ -11,12 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Camera.h" />
     <ClInclude Include="src\graphics\Mesh.h" />
+    <ClInclude Include="src\graphics\Model.h" />
     <ClInclude Include="src\graphics\primitives\Cube.h" />
     <ClInclude Include="src\graphics\primitives\Plane.h" />
     <ClInclude Include="src\graphics\primitives\Sphere.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\shaders\BasicShader.h" />
     <ClInclude Include="src\math\Mat4.h" />
+    <ClInclude Include="src\math\Transformation.h" />
     <ClInclude Include="src\scene\Component.h" />
     <ClInclude Include="src\scene\Scene.h" />
     <ClInclude Include="src\Application.h" />
@@ -27,12 +31,15 @@
     <ClInclude Include="src\graphics\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Camera.cpp" />
     <ClCompile Include="src\graphics\Mesh.cpp" />
+    <ClCompile Include="src\graphics\Model.cpp" />
     <ClCompile Include="src\graphics\primitives\Cube.cpp" />
     <ClCompile Include="src\graphics\primitives\Plane.cpp" />
     <ClCompile Include="src\graphics\primitives\Sphere.cpp" />
     <ClCompile Include="src\graphics\Shader.cpp" />
     <ClCompile Include="src\math\Mat4.cpp" />
+    <ClCompile Include="src\math\Transformation.cpp" />
     <ClCompile Include="src\scene\Component.cpp" />
     <ClCompile Include="src\scene\Scene.cpp" />
     <ClCompile Include="src\Application.cpp" />
