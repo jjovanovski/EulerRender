@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EulerRender", "EulerRender\EulerRender.vcxproj", "{4059B76C-EC81-4F3A-B136-1A2A1058F509}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{926483DC-5E08-4463-A47D-333CCA631F2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4059B76C-EC81-4F3A-B136-1A2A1058F509}.Debug|x64.ActiveCfg = Debug|x64
+		{4059B76C-EC81-4F3A-B136-1A2A1058F509}.Debug|x64.Build.0 = Debug|x64
+		{4059B76C-EC81-4F3A-B136-1A2A1058F509}.Release|x64.ActiveCfg = Release|x64
+		{4059B76C-EC81-4F3A-B136-1A2A1058F509}.Release|x64.Build.0 = Release|x64
+		{926483DC-5E08-4463-A47D-333CCA631F2C}.Debug|x64.ActiveCfg = Debug|x64
+		{926483DC-5E08-4463-A47D-333CCA631F2C}.Debug|x64.Build.0 = Debug|x64
+		{926483DC-5E08-4463-A47D-333CCA631F2C}.Release|x64.ActiveCfg = Release|x64
+		{926483DC-5E08-4463-A47D-333CCA631F2C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD605EC6-6831-4E5E-9388-787E7A3A7AEA}
+	EndGlobalSection
+EndGlobal
