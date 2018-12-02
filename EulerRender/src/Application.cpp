@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+using namespace Euler;
+
 Application::Application(int width, int height, const char* title) {
 	glfwInit();
 

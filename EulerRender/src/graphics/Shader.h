@@ -10,25 +10,29 @@
 
 #include "../math/Mat4.h"
 
-class EULER_API Shader {
-private:
-	GLuint id;
+namespace Euler {
 
-	std::unordered_map<std::string, GLint> uniformLocations;
+	class EULER_API Shader {
+	private:
+		GLuint id;
 
-public:
-	Shader(const char* vertexShaderSource, const char* fragmentShaderSource);
-	~Shader();
+		std::unordered_map<std::string, GLint> uniformLocations;
 
-	void Use();
-	void Dispose();
+	public:
+		Shader(const char* vertexShaderSource, const char* fragmentShaderSource);
+		~Shader();
 
-	int GetUniformLocation(std::string name);
+		void Use();
+		void Dispose();
 
-	// uniforms setters
-	void SetFloat(std::string name, float val);
-	void SetVec3(std::string name, float x, float y, float z);
-	void SetMat4(std::string name, Mat4* mat);
+		int GetUniformLocation(std::string name);
 
-};
+		// uniforms setters
+		void SetFloat(std::string name, float val);
+		void SetVec3(std::string name, float x, float y, float z);
+		void SetMat4(std::string name, Mat4* mat);
+
+	};
+
+}
 

@@ -7,19 +7,23 @@
 
 #include "Vertex.h"
 
-class EULER_API Mesh {
-private:
-	GLuint vao, vbo, ebo;
+namespace Euler {
 
-public:
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
+	class EULER_API Mesh {
+	private:
+		GLuint vao, vbo, ebo;
 
-	Mesh();
-	virtual ~Mesh();
+	public:
+		std::vector<Vertex> vertices;
+		std::vector<unsigned int> indices;
 
-	void Upload();
-	void Bind();
-	void Dispose();
-};
+		Mesh();
+		virtual ~Mesh();
+
+		void Upload();
+		void Bind();
+		void Dispose();
+	};
+
+}
 

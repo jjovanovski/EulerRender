@@ -1,5 +1,7 @@
 #include "Component.h"
 
+using namespace Euler;
+
 Component::Component() {
 }
 

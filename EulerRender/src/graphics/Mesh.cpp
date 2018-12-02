@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+using namespace Euler;
+
 Mesh::Mesh() {
 }
 

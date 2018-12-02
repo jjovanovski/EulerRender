@@ -4,21 +4,24 @@
 
 #include "../API.h"
 
-class EULER_API Component {
-private:
-	Component * parent = nullptr;
-	std::vector<Component*> children;
+namespace Euler {
 
-protected:
-	void UpdateComponent();
-	void DrawComponent();
-	virtual void Update() {};
-	virtual void Draw() {};
+	class EULER_API Component {
+	private:
+		Component * parent = nullptr;
+		std::vector<Component*> children;
 
-public:
-	Component();
-	virtual ~Component();
+	protected:
+		void UpdateComponent();
+		void DrawComponent();
+		virtual void Update() {};
+		virtual void Draw() {};
 
-	void AddChild(Component * component);
-};
+	public:
+		Component();
+		virtual ~Component();
 
+		void AddChild(Component * component);
+	};
+
+}

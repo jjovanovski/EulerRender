@@ -1,5 +1,7 @@
 #include "Mat4.h"
 
+using namespace Euler;
+
 Mat4::Mat4() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {

@@ -1,5 +1,7 @@
 #include "Shader.h"
 
+using namespace Euler;
+
 Shader::Shader(const char* vertexShaderSource, const char* fragmentShaderSource) {
 	int success;
 	char infoLog[512];

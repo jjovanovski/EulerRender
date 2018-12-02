@@ -1,6 +1,6 @@
 #include "Cube.h"
 
-
+using namespace Euler;
 
 Cube::Cube() {
 	float verts[] = {

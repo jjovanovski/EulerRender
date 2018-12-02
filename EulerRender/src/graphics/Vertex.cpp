@@ -1,5 +1,7 @@
 #include "Vertex.h"
 
+using namespace Euler;
+
 Vertex::Vertex(float x, float y, float z, float nx, float ny, float nz, float u, float v) {
 	this->position.x = x;
 	this->position.y = y;

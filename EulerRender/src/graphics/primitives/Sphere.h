@@ -5,9 +5,12 @@
 #include <cmath>
 #include "../Mesh.h"
 
-class EULER_API Sphere : public Mesh {
-public:
-	Sphere(int rings, int sectors);
-	~Sphere();
-};
+namespace Euler {
 
+	class EULER_API Sphere : public Mesh {
+	public:
+		Sphere(int rings, int sectors);
+		~Sphere();
+	};
+
+}

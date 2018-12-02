@@ -2,7 +2,7 @@
 
 #include "Euler.h"
 
-class MyScene : public Scene {
+class MyScene : public Euler::Scene {
 
 	void Update() {
 		std::cout << "Scene update" << std::endl;
@@ -15,7 +15,7 @@ class MyScene : public Scene {
 };
 
 int main(char** args, int argc) {
-	Application app(600, 600, "App test");
+	Euler::Application app(600, 600, "App test");
 	MyScene scene;
 	app.SetScene(&scene);
 	app.Run();

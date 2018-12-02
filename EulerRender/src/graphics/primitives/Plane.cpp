@@ -1,5 +1,7 @@
 #include "Plane.h"
 
+using namespace Euler;
+
 Plane::Plane() {
 	// add vertices
 	vertices.push_back(Vertex(-0.5f, -0.5f, 0.0f,	0.0f, 0.0f, 1.0f,	0.0f, 0.0f));

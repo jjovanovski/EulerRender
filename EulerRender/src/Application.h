@@ -7,21 +7,24 @@
 
 #include "scene\Scene.h"
 
-class EULER_API Application {
-private:
-	GLFWwindow * window = nullptr;
-	int width, height;
-	char* title;
+namespace Euler {
 
-	Scene * scene = nullptr;
+	class EULER_API Application {
+	private:
+		GLFWwindow * window = nullptr;
+		int width, height;
+		char* title;
 
-public:
-	Application(int width, int height, const char* title);
-	virtual ~Application();
+		Scene * scene = nullptr;
 
-	void Run();
+	public:
+		Application(int width, int height, const char* title);
+		virtual ~Application();
 
-	Scene * GetScene();
-	void SetScene(Scene * scene);
-};
+		void Run();
 
+		Scene * GetScene();
+		void SetScene(Scene * scene);
+	};
+
+}

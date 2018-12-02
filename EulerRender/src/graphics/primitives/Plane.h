@@ -4,9 +4,12 @@
 
 #include "../Mesh.h"
 
-class EULER_API Plane : public Mesh {
-public:
-	Plane();
-	~Plane();
-};
+namespace Euler {
 
+	class EULER_API Plane : public Mesh {
+	public:
+		Plane();
+		~Plane();
+	};
+
+}

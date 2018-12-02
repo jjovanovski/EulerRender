@@ -1,5 +1,7 @@
 #include "Sphere.h"
 
+using namespace Euler;
+
 Sphere::Sphere(int rings, int sectors) {
 	float d_theta = 180.0f / rings;
 	float d_phi = 360.0f / sectors;
