@@ -2,14 +2,6 @@
 
 #include "Euler.h"
 
-class TestComponent : public Component {
-
-	void Update() {
-		std::cout << "Component update" << std::endl;
-	}
-
-};
-
 class MyScene : public Scene {
 
 	void Update() {

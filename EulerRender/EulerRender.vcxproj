@@ -11,17 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\math\Mat4.h" />
     <ClInclude Include="src\scene\Component.h" />
     <ClInclude Include="src\scene\Scene.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\API.h" />
     <ClInclude Include="src\Euler.h" />
+    <ClInclude Include="src\math\Vec3.h" />
+    <ClInclude Include="src\math\Vec2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\math\Mat4.cpp" />
     <ClCompile Include="src\scene\Component.cpp" />
     <ClCompile Include="src\scene\Scene.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\math\Vec3.cpp" />
+    <ClCompile Include="src\math\Vec2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
