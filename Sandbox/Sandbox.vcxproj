@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\EulerRender\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)EulerRender\src;$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /y "$(SolutionDir)bin\Debug-x64\EulerRender\*.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
@@ -70,7 +70,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\EulerRender\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)EulerRender\src;$(SolutionDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

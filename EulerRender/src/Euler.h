@@ -5,3 +5,5 @@
 #include "API.h"
 
 #include "Application.h"
+#include "scene\Component.h"
+#include "scene\Scene.h"

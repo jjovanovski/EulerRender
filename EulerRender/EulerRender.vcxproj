@@ -11,12 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\scene\Component.h" />
+    <ClInclude Include="src\scene\Scene.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\API.h" />
     <ClInclude Include="src\Euler.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scene\Component.cpp" />
+    <ClCompile Include="src\scene\Scene.cpp" />
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\glad.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -64,7 +69,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);EULER_EXPORTS;</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -80,7 +85,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);EULER_EXPORTS;</PreprocessorDefinitions>
     </ClCompile>
     <Link>
