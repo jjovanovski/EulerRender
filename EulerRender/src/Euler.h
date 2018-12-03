@@ -18,6 +18,7 @@
 #include "graphics\Model.h"
 #include "graphics\Shader.h"
 #include "graphics\Vertex.h"
+#include "graphics\Material.h"
 #include "graphics\primitives\Cube.h"
 #include "graphics\primitives\Sphere.h"
 #include "graphics\primitives\Plane.h"

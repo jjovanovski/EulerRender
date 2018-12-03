@@ -8,8 +8,10 @@ class MyScene : public Euler::Scene {
 public:
 	Euler::Shader * shader;
 	Euler::Cube * cube;
+	Euler::Sphere * sphere;
 	Euler::Model * cubeModel;
 	Euler::Camera * camera;
+	Euler::Material * material;
 	float a = 0.0f;
 
 	MyScene() {
@@ -22,12 +24,20 @@ public:
 		shader->SetFloat("lightIntensity", 0.7f);
 		
 		cube = new Euler::Cube;
+		sphere = new Euler::Sphere(30, 30);
+
 		cubeModel = new Euler::Model();
-		cubeModel->mesh = cube;
-		cubeModel->roty = 45.0f;
+		cubeModel->mesh = sphere;
+		cubeModel->roty = 5.0f;
+		cubeModel->rotx = 0.0f;
+		//cubeModel->scalex = 0.5f;
+		//cubeModel->scaley = 0.5f;
+		//cubeModel->scalez = 0.5f;
 
 		camera = new Euler::Camera();
 		camera->z -= 7;
+
+		material = new Euler::Material(Euler::Vec3(0.0215f, 0.1745f, 0.0215f), Euler::Vec3(0.07568, 0.61424, 0.07568), Euler::Vec3(0.633, 0.727811, 0.633), 0.6f*128.0f);
 	}
 
 	~MyScene() {
@@ -35,11 +45,12 @@ public:
 		delete cube;
 		delete cubeModel;
 		delete camera;
+		delete material;
 	}
 
 	void Update() {
 		//cubeModel->rotx += 0.01f;
-		a += 0.1f;
+		a += 0.05f;
 	}
 
 	void Draw() {
@@ -47,7 +58,7 @@ public:
 		shader->SetVec3("cameraPos", camera->x, camera->y, camera->z);
 
 		shader->SetVec3("objectColor", 0.5f, 0.67f, 1.0f);
-		camera->Draw(cubeModel, shader);
+		camera->Draw(cubeModel, shader, material);
 	}
 
 };
