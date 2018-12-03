@@ -25,7 +25,6 @@ void Camera::Draw(Model * model, Shader * shader, Material * material) {
 	shader->SetMat4("view", &GetViewMatrix());
 	shader->SetMat4("proj", &Transformation::Perspective());
 
-	shader->SetVec3("material.ambient", material->ambient.x, material->ambient.y, material->ambient.z);
 	shader->SetVec3("material.diffuse", material->diffuse.x, material->diffuse.y, material->diffuse.z);
 	shader->SetVec3("material.specular", material->specular.x, material->specular.y, material->specular.z);
 	shader->SetFloat("material.shininess", material->shininess);

@@ -17,8 +17,6 @@ public:
 	MyScene() {
 		shader = new Euler::Shader(BASIC_SHADER_VERTEX, BASIC_SHADER_FRAGMENT);
 		shader->Use();
-		shader->SetVec3("ambientColor", 1.0f, 1.0f, 1.0f);
-		shader->SetFloat("ambientIntensity", 0.3f);
 		shader->SetVec3("lightPos", 0, 0, 0);
 		shader->SetVec3("lightColor", 1.0f, 1.0f, 1.0f);
 		shader->SetFloat("lightIntensity", 0.7f);
@@ -37,7 +35,7 @@ public:
 		camera = new Euler::Camera();
 		camera->z -= 7;
 
-		material = new Euler::Material(Euler::Vec3(0.0215f, 0.1745f, 0.0215f), Euler::Vec3(0.07568, 0.61424, 0.07568), Euler::Vec3(0.633, 0.727811, 0.633), 0.6f*128.0f);
+		material = new Euler::Material(Euler::Vec3(0.07568, 0.61424, 0.07568), Euler::Vec3(0.633, 0.727811, 0.633), 0.6f*128.0f);
 	}
 
 	~MyScene() {
