@@ -19,7 +19,7 @@ Mat4 Camera::GetViewMatrix() {
 	return Transformation::Translate(x, y, z) * Transformation::Rotate(rotx, 1, 0, 0) * Transformation::Rotate(roty, 0, 1, 0) * Transformation::Rotate(rotz, 0, 0, 1) * Transformation::Identity();
 }
 
-void Camera::Draw(Model * model, Shader * shader, Material * material) {
+/*void Camera::Draw(Model * model, Shader * shader, Material * material) {
 	shader->Use();
 	shader->SetMat4("model", &model->GetModelMatrix());
 	shader->SetMat4("view", &GetViewMatrix());
@@ -32,4 +32,4 @@ void Camera::Draw(Model * model, Shader * shader, Material * material) {
 	// refactor this when there will be more meshes per model
 	model->mesh->Bind();
 	glDrawElements(GL_TRIANGLES, model->mesh->indices.size(), GL_UNSIGNED_INT, 0);
-}
+}*/

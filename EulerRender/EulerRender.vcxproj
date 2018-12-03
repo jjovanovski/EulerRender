@@ -11,8 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\scene\DirectionalLight.h" />
     <ClInclude Include="src\graphics\Material.h" />
-    <ClInclude Include="src\graphics\Camera.h" />
+    <ClInclude Include="src\scene\Camera.h" />
     <ClInclude Include="src\graphics\Mesh.h" />
     <ClInclude Include="src\graphics\Model.h" />
     <ClInclude Include="src\graphics\primitives\Cube.h" />
@@ -32,8 +33,9 @@
     <ClInclude Include="src\graphics\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scene\DirectionalLight.cpp" />
     <ClCompile Include="src\graphics\Material.cpp" />
-    <ClCompile Include="src\graphics\Camera.cpp" />
+    <ClCompile Include="src\scene\Camera.cpp" />
     <ClCompile Include="src\graphics\Mesh.cpp" />
     <ClCompile Include="src\graphics\Model.cpp" />
     <ClCompile Include="src\graphics\primitives\Cube.cpp" />

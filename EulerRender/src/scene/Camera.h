@@ -2,10 +2,7 @@
 
 #include "../API.h"
 
-#include "Model.h"
-#include "Shader.h"
-#include "Material.h"
-
+#include "../math/Mat4.h"
 #include "../math/Transformation.h"
 
 namespace Euler {
@@ -19,7 +16,6 @@ namespace Euler {
 		~Camera();
 
 		Mat4 GetViewMatrix();
-		void Draw(Model * model, Shader * shader, Material * material);
 	};
 
 }
