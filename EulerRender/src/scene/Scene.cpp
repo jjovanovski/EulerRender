@@ -6,8 +6,9 @@ using namespace Euler;
 
 Scene::Scene() {
 	shader = new Shader(BASIC_SHADER_VERTEX, BASIC_SHADER_FRAGMENT);
-	directionalLight = new DirectionalLight(Vec3(1, 1, 0), Vec3(1, 1, 1), 0.7f);
+	directionalLight = new DirectionalLight(Vec3(-1, -1, -1), Vec3(1, 1, 1), 0.7f);
 	camera = new Camera();
+	camera->z -= 10;
 }
 
 Scene::~Scene() {
@@ -29,10 +30,12 @@ void Scene::DrawScene() {
 	shader->SetVec3("directionalLight.color", directionalLight->color.x, directionalLight->color.y, directionalLight->color.z);
 	shader->SetFloat("directionalLight.intensity", directionalLight->intensity);
 
+	// TODO: other lights settings
+
 	// camera settings
 	shader->SetVec3("cameraPosition", camera->x, camera->y, camera->z);
 	shader->SetMat4("view", &camera->GetViewMatrix());
-	shader->SetMat4("projection", &Transformation::Perspective());
+	shader->SetMat4("proj", &Transformation::Perspective());
 
 	this->DrawComponent();
 }

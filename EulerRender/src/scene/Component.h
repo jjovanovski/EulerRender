@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "../API.h"
+#include "../math/Vec3.h"
 
 namespace Euler {
 
@@ -18,6 +19,10 @@ namespace Euler {
 		virtual void Draw() {};
 
 	public:
+		Vec3 position;
+		Vec3 rotation;
+		Vec3 scale;
+
 		Component();
 		virtual ~Component();
 
