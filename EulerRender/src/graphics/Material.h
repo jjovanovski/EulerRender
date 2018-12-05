@@ -3,12 +3,14 @@
 #include "../API.h"
 #include "../math/Vec3.h"
 #include "../graphics/Shader.h"
+#include "../graphics/Texture.h"
 
 namespace Euler {
 
 	class EULER_API Material {
 	public:
-		Shader * shader;
+		Shader * shader = nullptr;
+		Texture * texture = nullptr;
 		Vec3 ambient, diffuse, specular;
 		float shininess;
 

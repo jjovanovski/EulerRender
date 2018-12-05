@@ -6,7 +6,7 @@ using namespace Euler;
 
 Scene::Scene() {
 	shader = new Shader(BASIC_SHADER_VERTEX, BASIC_SHADER_FRAGMENT);
-	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 0.7f);
+	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 1.0f);
 	camera = new Camera();
 	camera->z -= 10;
 }

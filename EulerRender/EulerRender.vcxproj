@@ -31,6 +31,7 @@
     <ClInclude Include="src\math\Vec2.h" />
     <ClInclude Include="src\graphics\Vertex.h" />
     <ClInclude Include="src\scene\WorldModel.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\scene\DirectionalLight.cpp" />
@@ -51,6 +52,7 @@
     <ClCompile Include="src\math\Vec2.cpp" />
     <ClCompile Include="src\graphics\Vertex.cpp" />
     <ClCompile Include="src\scene\WorldModel.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

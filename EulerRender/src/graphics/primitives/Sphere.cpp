@@ -19,7 +19,10 @@ Sphere::Sphere(int rings, int sectors) {
 			float y = cos(theta*DEG)*sin(phi*DEG);
 			float z = sin(theta*DEG);
 
-			vertices.push_back(Vertex(x, y, z, x, y, z));
+			float u = atan2(x, z) / (2.0 * PI) + 0.5f;
+			float v = y * 0.5f + 0.5f;
+
+			vertices.push_back(Vertex(x, y, z, x, y, z, u, v));
 
 			if (j < sectors) {
 				indices.push_back(i*(sectors)+j);
