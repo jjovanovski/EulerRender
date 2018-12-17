@@ -26,7 +26,7 @@ void WorldModel::AddMesh(Mesh * mesh, Material * material) {
 
 Mat4 WorldModel::GetModelMatrix() {
 	return Transformation::Translate(position.x, position.y, position.z)
-		* Transformation::Rotate(rotation.x, 1, 0, 0) * Transformation::Rotate(rotation.y, 0, 1, 0) * Transformation::Rotate(rotation.z, 0, 0, 1)
+		* rotation.GetMatrix()
 		* Transformation::Scale(scale.x, scale.y, scale.z)
 		* Transformation::Identity();
 }

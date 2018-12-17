@@ -50,7 +50,8 @@ public:
 
 	void Update() {
 		time += 0.1f;
-		model2->rotation.y = time*0.5f;
+		model2->rotation = Euler::Quaternion::Euler(time * 0.2f, 1.0f, 0.0f, 1.0f);
+		//model2->rotation.y = time*0.5f;
 		//model2->position.x = sin(time);
 	}
 

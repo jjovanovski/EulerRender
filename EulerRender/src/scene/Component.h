@@ -4,6 +4,7 @@
 
 #include "../API.h"
 #include "../math/Vec3.h"
+#include "../math/Quaternion.h"
 
 namespace Euler {
 
@@ -20,7 +21,7 @@ namespace Euler {
 
 	public:
 		Vec3 position;
-		Vec3 rotation;
+		Quaternion rotation;
 		Vec3 scale;
 
 		Component();

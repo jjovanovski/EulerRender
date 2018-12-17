@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\math\Quaternion.h" />
     <ClInclude Include="src\scene\DirectionalLight.h" />
     <ClInclude Include="src\graphics\Material.h" />
     <ClInclude Include="src\scene\Camera.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="src\graphics\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\math\Quaternion.cpp" />
     <ClCompile Include="src\scene\DirectionalLight.cpp" />
     <ClCompile Include="src\graphics\Material.cpp" />
     <ClCompile Include="src\scene\Camera.cpp" />

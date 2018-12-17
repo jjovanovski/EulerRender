@@ -1,5 +1,7 @@
 #include "Transformation.h"
 
+#include "Quaternion.h"
+
 using namespace Euler;
 
 Transformation::Transformation() {
@@ -40,12 +42,7 @@ Mat4 Transformation::Scale(float x, float y, float z) {
 }
 
 Mat4 Transformation::Rotate(float angle, float x, float y, float z) {
-	Mat4 tmp;
-	tmp.mat[0][0] = cos(angle) + x*x*(1 - cos(angle));			tmp.mat[0][1] = x*y*(1 - cos(angle)) - z*sin(angle);				tmp.mat[0][2] = x*z*(1 - cos(angle)) + y*sin(angle);
-	tmp.mat[1][0] = y*x*(1 - cos(angle)) + z*sin(angle);		tmp.mat[1][1] = cos(angle) + y * y*(1 - cos(angle));				tmp.mat[1][2] = y*z*(1 - cos(angle)) - x*sin(angle);
-	tmp.mat[2][0] = z*x*(1 - cos(angle)) - y*sin(angle);		tmp.mat[2][1] = z*y*(1 - cos(angle)) + x*sin(angle);				tmp.mat[2][2] = cos(angle) + z * z*(1 - cos(angle));
-	tmp.mat[3][3] = 1;
-	return tmp;
+	return Quaternion::Euler(angle, x, y, z).GetMatrix();
 }
 
 Mat4 Transformation::Perspective() {
