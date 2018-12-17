@@ -8,15 +8,15 @@
 namespace Euler {
 
 	class EULER_API Quaternion {
-	private:
+	public:
 		float w, x, y, z;
 
 	public:
 		Quaternion(float w = 1, float x = 0, float y = 0, float z = 0);
 		~Quaternion();
 
-		friend Quaternion operator*(const Quaternion& left, const Quaternion& right);
-		friend Quaternion operator*(const Quaternion& left, const Vec3& right);
+		friend EULER_API Quaternion operator*(const Quaternion& left, const Quaternion& right);
+		friend EULER_API Quaternion operator*(const Quaternion& left, const Vec3& right);
 
 		float Len();
 		float Len2();
