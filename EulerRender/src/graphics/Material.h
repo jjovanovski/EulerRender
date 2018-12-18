@@ -11,6 +11,7 @@ namespace Euler {
 	public:
 		Shader * shader = nullptr;
 		Texture * texture = nullptr;
+		Texture * normalmap = nullptr;
 		Vec3 ambient, diffuse, specular;
 		float shininess;
 

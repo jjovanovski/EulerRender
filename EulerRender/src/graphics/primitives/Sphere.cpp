@@ -22,7 +22,13 @@ Sphere::Sphere(int rings, int sectors) {
 			float u = atan2(x, z) / (2.0 * PI) + 0.5f;
 			float v = y * 0.5f + 0.5f;
 
-			vertices.push_back(Vertex(x, y, z, x, y, z, u, v));
+			float normalLen = x * x + y * y + z * z;
+			float dot = y;
+			float tx = 0 - x*(dot/normalLen);
+			float ty = 1 - y*(dot/normalLen);
+			float tz = 0 - z*(dot/normalLen);
+
+			vertices.push_back(Vertex(x, y, z, x, y, z, 3*u, v, tx, ty, tz));
 
 			if (j < sectors) {
 				indices.push_back(i*(sectors)+j);

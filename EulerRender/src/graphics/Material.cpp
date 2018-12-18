@@ -15,10 +15,21 @@ void Material::SetupShader() {
 	shader->Use();
 
 	if (texture != nullptr) {
+		glActiveTexture(GL_TEXTURE0);
 		texture->Bind();
+		shader->SetInt("diffuseTex", 0);
 		shader->SetFloat("useTexture", 1.0f);
 	} else {
 		shader->SetFloat("useTexture", 0.0f);
+	}
+
+	if (normalmap != nullptr) {
+		glActiveTexture(GL_TEXTURE1);
+		normalmap->Bind();
+		shader->SetInt("normalTex", 1);
+		shader->SetFloat("useNormalMap", 1.0f);
+	} else {
+		shader->SetFloat("useNormalMap", 0.0f);
 	}
 
 	shader->SetVec3("material.diffuse", diffuse.x, diffuse.y, diffuse.z);

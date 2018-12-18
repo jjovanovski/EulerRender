@@ -10,6 +10,7 @@ public:
 	Euler::Mesh * planeMesh;
 	Euler::Material * someMaterial;
 	Euler::Texture * brickTexture;
+	Euler::Texture * normalTexture;
 	Euler::WorldModel * model1;
 	Euler::WorldModel * model2;
 	float time = 0;
@@ -18,11 +19,13 @@ public:
 		sphereMesh = new Euler::Sphere(30, 30);
 		planeMesh = new Euler::Cube();
 
+		normalTexture = new Euler::Texture("brick_normal.jpg");
 		brickTexture = new Euler::Texture("brick_diffuse.jpg");
 
 		someMaterial = new Euler::Material();
 		someMaterial->shader = shader;
 		someMaterial->texture = brickTexture;
+		someMaterial->normalmap = normalTexture;
 		someMaterial->diffuse = Euler::Vec3(1, 1, 1);
 		someMaterial->specular = Euler::Vec3(0.1f, 0.1f, 0.1f);
 
@@ -49,8 +52,8 @@ public:
 	}
 
 	void Update() {
-		time += 0.1f;
-		model2->rotation = Euler::Quaternion::Euler(time * 0.2f, 1.0f, 0.0f, 1.0f);
+		time += 0.02f;
+		model2->rotation = Euler::Quaternion::Euler(time, 1.0f, 1.0f, 0.0f);
 		//model2->rotation.y = time*0.5f;
 		//model2->position.x = sin(time);
 	}
