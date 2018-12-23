@@ -11,7 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\input\GLFWInputHandler.h" />
+    <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\graphics\shaders\WorldShader.h" />
+    <ClInclude Include="src\input\InputHandler.h" />
+    <ClInclude Include="src\input\Key.h" />
     <ClInclude Include="src\math\Quaternion.h" />
     <ClInclude Include="src\scene\DirectionalLight.h" />
     <ClInclude Include="src\graphics\Material.h" />
@@ -36,6 +40,8 @@
     <ClInclude Include="src\graphics\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\input\GLFWInputHandler.cpp" />
+    <ClCompile Include="src\input\Input.cpp" />
     <ClCompile Include="src\math\Quaternion.cpp" />
     <ClCompile Include="src\scene\DirectionalLight.cpp" />
     <ClCompile Include="src\graphics\Material.cpp" />

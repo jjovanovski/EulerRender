@@ -2,9 +2,12 @@
 
 #include <iostream>
 
+#include "input\GLFWInputHandler.h"
+
 using namespace Euler;
 
 Application::Application(int width, int height, const char* title) {
+	// === init glfw ===
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -21,9 +24,14 @@ Application::Application(int width, int height, const char* title) {
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+
+	// === init input system ===
+	InputHandler* glfwInputHandler = new GLFWInputHandler(window);
+	Input::Init(glfwInputHandler);
 }
 
 Application::~Application() {
+	Input::Dispose();
 	glfwTerminate();
 }
 

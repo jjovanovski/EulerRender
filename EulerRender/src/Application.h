@@ -5,6 +5,7 @@
 #include <glad\glad.h>
 #include <GLFW\glfw3.h>
 
+#include "input\Input.h"
 #include "scene\Scene.h"
 
 namespace Euler {

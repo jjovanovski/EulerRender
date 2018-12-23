@@ -5,6 +5,8 @@
 #include "API.h"
 
 #include "Application.h"
+#include "input\Input.h"
+
 #include "scene\Component.h"
 #include "scene\Scene.h"
 #include "scene\Camera.h"
