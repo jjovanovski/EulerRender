@@ -26,3 +26,4 @@
 #include "graphics\primitives\Sphere.h"
 #include "graphics\primitives\Plane.h"
 #include "graphics\shaders\BasicShader.h"
+#include "graphics\shaders\WorldShader.h"

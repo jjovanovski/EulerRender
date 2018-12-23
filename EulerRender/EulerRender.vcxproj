@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\shaders\WorldShader.h" />
     <ClInclude Include="src\math\Quaternion.h" />
     <ClInclude Include="src\scene\DirectionalLight.h" />
     <ClInclude Include="src\graphics\Material.h" />

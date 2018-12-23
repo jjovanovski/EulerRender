@@ -17,22 +17,22 @@ public:
 
 	MyScene() {
 		sphereMesh = new Euler::Sphere(30, 30);
-		planeMesh = new Euler::Cube();
+		planeMesh = new Euler::Plane();
 
-		normalTexture = new Euler::Texture("brick_normal.jpg");
-		brickTexture = new Euler::Texture("brick_diffuse.jpg");
+		normalTexture = new Euler::Texture("brickwall_normal.jpg");
+		brickTexture = new Euler::Texture("brickwall.jpg");
 
 		someMaterial = new Euler::Material();
 		someMaterial->shader = shader;
 		someMaterial->texture = brickTexture;
-		someMaterial->normalmap = normalTexture;
+		//someMaterial->normalmap = normalTexture;
 		someMaterial->diffuse = Euler::Vec3(1, 1, 1);
-		someMaterial->specular = Euler::Vec3(0.1f, 0.1f, 0.1f);
+		someMaterial->specular = Euler::Vec3(0.0f, 0.0f, 0.0f);
 
 		model1 = new Euler::WorldModel();
-		model1->position.x = -2;
+		model1->position.x = 0;
 		model1->AddMesh(planeMesh, someMaterial);
-		//this->AddChild(model1);
+		this->AddChild(model1);
 
 		model2 = new Euler::WorldModel();
 		model2->position.x = 0;
@@ -53,7 +53,9 @@ public:
 
 	void Update() {
 		time += 0.02f;
-		model2->rotation = Euler::Quaternion::Euler(time, 1.0f, 1.0f, 0.0f);
+		model1->rotation = Euler::Quaternion::Euler(time, 1.0f, 0.0f, 0.0f);
+		model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);
+		//model2->position = Euler::Vec3(sin(time), cos(time), 0);
 		//model2->rotation.y = time*0.5f;
 		//model2->position.x = sin(time);
 	}

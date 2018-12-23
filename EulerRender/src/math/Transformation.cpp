@@ -52,7 +52,7 @@ Mat4 Transformation::Perspective() {
 	float fov = 45.0f;
 
 	float n = 0.1f;
-	float f = 10.0f;
+	float f = 100.0f;
 	float t = n * tan((PI / 180.0f) * fov / 2.0f);
 	float b = -t;
 	float r = t * 1.0f;
