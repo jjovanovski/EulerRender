@@ -9,8 +9,7 @@ Camera::~Camera() {
 }
 
 Mat4 Camera::GetViewMatrix() {
-	return Transformation::Translate(position.x, position.y, position.z) * rotation.GetMatrix()
-		* Transformation::Identity();
+	return rotation.Conjugate().GetMatrix() * Transformation::Translate(-position.x, -position.y, -position.z);
 }
 
 /*void Camera::Draw(Model * model, Shader * shader, Material * material) {

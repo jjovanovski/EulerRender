@@ -10,6 +10,7 @@
 #include "scene\Component.h"
 #include "scene\Scene.h"
 #include "scene\Camera.h"
+#include "scene\FreeCamera.h"
 #include "scene\DirectionalLight.h"
 #include "scene\WorldModel.h"
 

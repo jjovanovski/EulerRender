@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\scene\FreeCamera.h" />
     <ClInclude Include="src\input\GLFWInputHandler.h" />
     <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\graphics\shaders\WorldShader.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="src\graphics\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\scene\FreeCamera.cpp" />
     <ClCompile Include="src\input\GLFWInputHandler.cpp" />
     <ClCompile Include="src\input\Input.cpp" />
     <ClCompile Include="src\math\Quaternion.cpp" />
