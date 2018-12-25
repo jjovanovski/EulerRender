@@ -22,6 +22,7 @@ namespace Euler {
 		static Vec2 GetMousePos();
 		static float GetMouseX();
 		static float GetMouseY();
+		static void HideCursor();
 
 		static bool GetKeyDown(Key key);
 		static bool GetKey(Key key);

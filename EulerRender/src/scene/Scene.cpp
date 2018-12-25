@@ -8,7 +8,7 @@ Scene::Scene() {
 	shader = new Shader(WORLD_SHADER_VERTEX, WORLD_SHADER_FRAGMENT);
 	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 1.0f);
 	camera = new Camera();
-	camera->z -= 10;
+	camera->position.z -= 10;
 }
 
 Scene::~Scene() {
@@ -33,7 +33,7 @@ void Scene::DrawScene() {
 	// TODO: other lights settings
 
 	// camera settings
-	shader->SetVec3("cameraPos", camera->x, camera->y, camera->z);
+	shader->SetVec3("cameraPos", camera->position.x, camera->position.y, camera->position.z);
 	shader->SetMat4("view", &camera->GetViewMatrix());
 	shader->SetMat4("proj", &Transformation::Perspective());
 

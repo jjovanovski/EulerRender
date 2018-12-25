@@ -36,3 +36,15 @@ void Component::AddChild(Component * component) {
 		children.push_back(component);
 	}
 }
+
+Vec3 Component::Forward() {
+	return (rotation * Vec3(0, 0, 1)).Normalized();
+}
+
+Vec3 Component::Right() {
+	return (rotation * Vec3(1, 0, 0)).Normalized();
+}
+
+Vec3 Component::Up() {
+	return (rotation * Vec3(0, 1, 0)).Normalized();
+}

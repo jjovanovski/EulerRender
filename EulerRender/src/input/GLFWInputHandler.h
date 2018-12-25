@@ -23,6 +23,7 @@ namespace Euler {
 		void Dispose() ;
 		float GetMouseX();
 		float GetMouseY();
+		void HideCursor();
 		bool GetKey(Key key);
 		bool GetKeyDown(Key key);
 		bool GetKeyUp(Key key);

@@ -31,6 +31,10 @@ float GLFWInputHandler::GetMouseY() {
 	return mouseY;
 };
 
+void GLFWInputHandler::HideCursor() {
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
 bool GLFWInputHandler::GetKey(Key key) {
 	if (key == MOUSE_LEFT)
 		return glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;

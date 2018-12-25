@@ -19,25 +19,25 @@ bool Euler::operator!=(const Vec3& left, const Vec3& right) {
 	return !(left == right);
 }
 
-Vec3& Euler::operator+(const Vec3& left, const Vec3& right) {
+Vec3 Euler::operator+(const Vec3& left, const Vec3& right) {
 	Vec3 result = left;
 	result += right;
 	return result;
 }
 
-Vec3& Euler::operator-(const Vec3& left, const Vec3& right) {
+Vec3 Euler::operator-(const Vec3& left, const Vec3& right) {
 	Vec3 result = left;
 	result -= right;
 	return result;
 }
 
-Vec3& Euler::operator*(const Vec3& left, const Vec3& right) {
+Vec3 Euler::operator*(const Vec3& left, const Vec3& right) {
 	Vec3 result = left;
 	result *= right;
 	return result;
 }
 
-Vec3& Euler::operator/(const Vec3& left, const Vec3& right) {
+Vec3 Euler::operator/(const Vec3& left, const Vec3& right) {
 	Vec3 result = left;
 	result /= right;
 	return result;

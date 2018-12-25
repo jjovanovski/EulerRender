@@ -15,6 +15,7 @@ namespace Euler {
 
 		virtual float GetMouseX() = 0;
 		virtual float GetMouseY() = 0;
+		virtual void HideCursor() = 0;
 		
 		virtual bool GetKey(Key key) = 0;
 		virtual bool GetKeyDown(Key key) = 0;

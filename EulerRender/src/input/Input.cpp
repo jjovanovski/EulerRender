@@ -37,6 +37,10 @@ float Euler::Input::GetMouseY() {
 	return handler->GetMouseY();
 }
 
+void Euler::Input::HideCursor() {
+	handler->HideCursor();
+}
+
 bool Euler::Input::GetKey(Key key) {
 	return handler->GetKey(key);
 }

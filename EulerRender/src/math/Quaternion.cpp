@@ -23,13 +23,23 @@ Quaternion Euler::operator*(const Quaternion & left, const Quaternion & right) {
 	return Quaternion(rw, rx, ry, rz);
 }
 
-Quaternion Euler::operator*(const Quaternion & left, const Vec3 & right) {
+/*Quaternion Euler::operator*(const Quaternion & left, const Vec3 & right) {
 	float rw = -left.x * right.x - left.y * right.y - left.z * right.z;
 	float rx = left.w * right.x + left.y * right.z - left.z * right.y;
 	float ry = left.w * right.y + left.z * right.x - left.x * right.z;
 	float rz = left.w * right.z + left.x * right.y - left.y * right.x;
 
 	return Quaternion(rw, rx, ry, rz);
+}*/
+
+Vec3 Euler::operator*(const Quaternion& left, const Vec3& right) {
+	Mat4 rot = left.GetMatrix();
+	Vec3 rotated;
+	rotated.x = rot.mat[0][0] * right.x + rot.mat[0][1] * right.y + rot.mat[0][2] * right.z;
+	rotated.y = rot.mat[1][0] * right.x + rot.mat[1][1] * right.y + rot.mat[1][2] * right.z;
+	rotated.z = rot.mat[2][0] * right.x + rot.mat[2][1] * right.y + rot.mat[2][2] * right.z;
+
+	return rotated.Normalized();
 }
 
 float Quaternion::Len() {
@@ -80,7 +90,7 @@ Quaternion Euler::Quaternion::Euler(float angle, float x, float y, float z) {
 	return q;
 }
 
-Mat4 Quaternion::GetMatrix() {
+Mat4 Quaternion::GetMatrix() const {
 	Mat4 qmat;
 
 	qmat.mat[0][0] = 1.0f - 2.0f * (y * y + z * z);			qmat.mat[0][1] = 2.0f * (x * y - z * w);			qmat.mat[0][2] = 2.0f * (x * z + y * w);

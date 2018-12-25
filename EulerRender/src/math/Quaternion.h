@@ -16,7 +16,8 @@ namespace Euler {
 		~Quaternion();
 
 		friend EULER_API Quaternion operator*(const Quaternion& left, const Quaternion& right);
-		friend EULER_API Quaternion operator*(const Quaternion& left, const Vec3& right);
+		//friend EULER_API Quaternion operator*(const Quaternion& left, const Vec3& right);
+		friend EULER_API Vec3 operator*(const Quaternion& left, const Vec3& right);
 
 		float Len();
 		float Len2();
@@ -26,7 +27,7 @@ namespace Euler {
 
 		void SetEuler(float angle, float x, float y, float z);
 		static Quaternion Euler(float angle, float x, float y, float z);
-		Mat4 GetMatrix();
+		Mat4 GetMatrix() const;
 	};
 
 }

@@ -28,6 +28,10 @@ namespace Euler {
 		virtual ~Component();
 
 		void AddChild(Component * component);
+
+		Vec3 Forward();
+		Vec3 Right();
+		Vec3 Up();
 	};
 
 }

@@ -2,7 +2,7 @@
 
 using namespace Euler;
 #include <iostream>
-WorldModel::WorldModel() {
+WorldModel::WorldModel() : Component() {
 }
 
 
