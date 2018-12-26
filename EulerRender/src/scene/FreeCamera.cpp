@@ -2,8 +2,11 @@
 
 using namespace Euler;
 
-FreeCamera::FreeCamera(Camera * camera) : Component() {
+FreeCamera::FreeCamera(Camera * camera, float mouseSensitivityX, float mouseSensitivityY, float movementSpeed) : Component() {
 	this->camera = camera;
+	this->mouseSensitivityX = mouseSensitivityX;
+	this->mouseSensitivityY = mouseSensitivityY;
+	this->movementSpeed = movementSpeed;
 
 	Input::HideCursor();
 }
@@ -22,20 +25,19 @@ void FreeCamera::Update() {
 	cameraRotX += mouseDeltaY;
 	cameraRotY += mouseDeltaX;
 	
-	camera->rotation = Quaternion::Euler(cameraRotY * 0.005f, 0, 1, 0) * Quaternion::Euler(cameraRotX * 0.002f, 1, 0, 0);
+	camera->rotation = Quaternion::Euler(cameraRotY * mouseSensitivityY, 0, 1, 0) * Quaternion::Euler(cameraRotX * mouseSensitivityX, 1, 0, 0);
 
 	// keyboard movement
-	float camspeed = 0.1f;
 	Vec3 forwardDir = camera->Forward();
 	Vec3 rightDir = camera->Right();
 	if (Input::GetKey(Key::W)) {
-		camera->position -= Vec3(forwardDir.x * camspeed, forwardDir.y * camspeed, forwardDir.z * camspeed);
+		camera->position -= Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed);
 	} else if (Input::GetKey(Key::S)) {
-		camera->position += Vec3(forwardDir.x * camspeed, forwardDir.y * camspeed, forwardDir.z * camspeed);
+		camera->position += Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed);
 	}
 	if (Input::GetKey(Key::A)) {
-		camera->position -= Vec3(rightDir.x * camspeed, rightDir.y * camspeed, rightDir.z * camspeed);
+		camera->position -= Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed);
 	} else if (Input::GetKey(Key::D)) {
-		camera->position += Vec3(rightDir.x * camspeed, rightDir.y * camspeed, rightDir.z * camspeed);
+		camera->position += Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed);
 	}
 }

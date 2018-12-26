@@ -48,9 +48,7 @@ public:
 		model2->position.x = 0;
 		model2->AddMesh(sphereMesh, someMaterial);
 		this->AddChild(model2);
-
-		camera->position.y -= 0.5f;
-
+		
 		freeCam = new FreeCamera(camera);
 		this->AddChild(freeCam);
 	}
