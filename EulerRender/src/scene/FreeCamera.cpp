@@ -1,12 +1,15 @@
 #include "FreeCamera.h"
 
 using namespace Euler;
-
+#include <iostream>
 FreeCamera::FreeCamera(Camera * camera, float mouseSensitivityX, float mouseSensitivityY, float movementSpeed) : Component() {
 	this->camera = camera;
 	this->mouseSensitivityX = mouseSensitivityX;
 	this->mouseSensitivityY = mouseSensitivityY;
 	this->movementSpeed = movementSpeed;
+
+	this->cameraRotX = 0;
+	this->cameraRotY = 0;
 
 	Input::HideCursor();
 }

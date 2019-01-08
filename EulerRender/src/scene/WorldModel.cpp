@@ -10,18 +10,22 @@ WorldModel::~WorldModel() {
 }
 
 void WorldModel::Draw() {
-	for (MeshMaterial drawable : drawables) {
-		drawable.mesh->Bind();
-		drawable.material->SetupShader();
+	for (MeshMaterial * drawable : model->drawables) {
+		drawable->mesh->Bind();
+		drawable->material->SetupShader();
 		
-		drawable.material->shader->SetMat4("model", &GetModelMatrix());
+		drawable->material->shader->SetMat4("model", &GetModelMatrix());
 
-		glDrawElements(GL_TRIANGLES, drawable.mesh->indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, drawable->mesh->indices.size(), GL_UNSIGNED_INT, 0);
 	}
 }
 
-void WorldModel::AddMesh(Mesh * mesh, Material * material) {
-	drawables.push_back({ mesh, material });
+Model * WorldModel::GetModel() {
+	return model;
+}
+
+void WorldModel::SetModel(Model * model) {
+	this->model = model;
 }
 
 Mat4 WorldModel::GetModelMatrix() {

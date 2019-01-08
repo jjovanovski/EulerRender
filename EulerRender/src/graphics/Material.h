@@ -4,10 +4,11 @@
 #include "../math/Vec3.h"
 #include "../graphics/Shader.h"
 #include "../graphics/Texture.h"
+#include "../resources/Disposable.h"
 
 namespace Euler {
 
-	class EULER_API Material {
+	class EULER_API Material : public Disposable {
 	public:
 		Shader * shader = nullptr;
 		Texture * texture = nullptr;
@@ -17,6 +18,8 @@ namespace Euler {
 
 		Material(Vec3 diffuse = Vec3(1.0f, 1.0f, 1.0f), Vec3 specular = Vec3(1.0f, 1.0f, 1.0), float shininess = 128.0f);
 		~Material();
+
+		void Dispose();
 
 		void SetupShader();
 	};

@@ -1,14 +1,15 @@
 #include "Scene.h"
 
 #include "../graphics/shaders/WorldShader.h"
+#include "../resources/Resources.h"
 
 using namespace Euler;
 
 Scene::Scene() {
-	shader = new Shader(WORLD_SHADER_VERTEX, WORLD_SHADER_FRAGMENT);
+	shader = Resources::GetShader("WorldShader", WORLD_SHADER_VERTEX, WORLD_SHADER_FRAGMENT);
 	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 1.0f);
 	camera = new Camera();
-	camera->position.z -= 10;
+	camera->position.z += 10;
 }
 
 Scene::~Scene() {

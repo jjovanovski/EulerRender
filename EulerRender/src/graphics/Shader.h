@@ -9,10 +9,11 @@
 #include <string>
 
 #include "../math/Mat4.h"
+#include "../resources/Disposable.h"
 
 namespace Euler {
 
-	class EULER_API Shader {
+	class EULER_API Shader : public Disposable {
 	private:
 		GLuint id;
 

@@ -9,6 +9,16 @@ Mesh::~Mesh() {
 	Dispose();
 }
 
+void Mesh::Dispose() {
+	glDeleteBuffers(1, &vbo);
+	glDeleteBuffers(1, &ebo);
+	glDeleteVertexArrays(1, &vao);
+
+	vbo = 0;
+	ebo = 0;
+	vao = 0;
+}
+
 void Mesh::Upload() {
 	glCreateVertexArrays(1, &vao);
 	glCreateBuffers(1, &vbo);
@@ -38,14 +48,4 @@ void Mesh::Upload() {
 
 void Mesh::Bind() {
 	glBindVertexArray(vao);
-}
-
-void Mesh::Dispose() {
-	glDeleteBuffers(1, &vbo);
-	glDeleteBuffers(1, &ebo);
-	glDeleteVertexArrays(1, &vao);
-
-	vbo = 0;
-	ebo = 0;
-	vao = 0;
 }

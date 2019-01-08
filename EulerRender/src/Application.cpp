@@ -2,7 +2,12 @@
 
 #include <iostream>
 
-#include "input\GLFWInputHandler.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#include "input/GLFWInputHandler.h"
+#include "resources/Resources.h"
 
 using namespace Euler;
 
@@ -28,9 +33,13 @@ Application::Application(int width, int height, const char* title) {
 	// === init input system ===
 	InputHandler* glfwInputHandler = new GLFWInputHandler(window);
 	Input::Init(glfwInputHandler);
+
+	// === init resources system ===
+	Resources::Init();
 }
 
 Application::~Application() {
+	Resources::Dispose();
 	Input::Dispose();
 	glfwTerminate();
 }

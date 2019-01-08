@@ -9,6 +9,10 @@ Material::Material(Vec3 diffuse, Vec3 specular, float shininess) {
 }
 
 Material::~Material() {
+	Dispose();
+}
+
+void Material::Dispose() {
 }
 
 void Material::SetupShader() {

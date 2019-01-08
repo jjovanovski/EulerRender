@@ -6,10 +6,11 @@
 #include <vector>
 
 #include "Vertex.h"
+#include "../resources/Disposable.h"
 
 namespace Euler {
 
-	class EULER_API Mesh {
+	class EULER_API Mesh : public Disposable {
 	private:
 		GLuint vao, vbo, ebo;
 
@@ -20,9 +21,10 @@ namespace Euler {
 		Mesh();
 		virtual ~Mesh();
 
+		void Dispose();
+
 		void Upload();
 		void Bind();
-		void Dispose();
 	};
 
 }

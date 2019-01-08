@@ -7,21 +7,18 @@
 #include "Component.h"
 #include "../graphics/Mesh.h"
 #include "../graphics/Material.h"
+#include "../graphics/Model.h"
+#include "../graphics/MeshMaterial.h"
 #include "../math/Mat4.h"
 #include "../math/Transformation.h"
 
 #include <vector>
 
 namespace Euler {
-
-	struct MeshMaterial {
-		Mesh * mesh;
-		Material * material;
-	};
-
+	
 	class EULER_API WorldModel : public Component {
 	private:
-		std::vector<MeshMaterial> drawables;
+		Model * model;
 
 	public:
 		WorldModel();
@@ -30,7 +27,8 @@ namespace Euler {
 		// override Draw() method from Component
 		void Draw();
 
-		void AddMesh(Mesh * mesh, Material * material);
+		Model * GetModel();
+		void SetModel(Model * model);
 
 		Mat4 GetModelMatrix();
 	};
