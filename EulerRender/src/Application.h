@@ -23,6 +23,7 @@ namespace Euler {
 		virtual ~Application();
 
 		void Run();
+		void Dispose();
 
 		Scene * GetScene();
 		void SetScene(Scene * scene);

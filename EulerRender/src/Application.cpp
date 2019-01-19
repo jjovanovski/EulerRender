@@ -39,9 +39,7 @@ Application::Application(int width, int height, const char* title) {
 }
 
 Application::~Application() {
-	Resources::Dispose();
-	Input::Dispose();
-	glfwTerminate();
+	
 }
 
 void Application::Run() {
@@ -56,6 +54,14 @@ void Application::Run() {
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
+
+	Dispose();
+}
+
+void Application::Dispose() {
+	Resources::Dispose();
+	Input::Dispose();
+	glfwTerminate();
 }
 
 Scene * Application::GetScene() {

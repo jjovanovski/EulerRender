@@ -24,6 +24,8 @@ public:
 	MyScene() {
 		Input::HideCursor();
 
+		skybox = Resources::GetSkybox("sunset", {"sunset/xp.png", "sunset/xn.png", "sunset/yp.png", "sunset/yn.png", "sunset/zp.png", "sunset/zn.png"});
+
 		sphereMesh = new Euler::Sphere(30, 30);
 		planeMesh = new Euler::Plane();
 
@@ -65,11 +67,13 @@ public:
 		freeCam = new FreeCamera(camera);
 		this->AddChild(freeCam);
 
-		/*Model * nanosuit = Resources::GetModel("nanosuit", "nanosuit/nanosuit.obj");
+		directionalLight->intensity = 1.5f;
+
+		Model * nanosuit = Resources::GetModel("nanosuit", "man/GTP_BMan_Jack_07_Stg_Lsn_Adl_Ccs_Gry_Mgr.obj");
 		nanosuitWorld = new WorldModel();
 		nanosuitWorld->SetModel(nanosuit);
-		nanosuitWorld->scale = Vec3(0.2f, 0.2f, 0.2f);
-		this->AddChild(nanosuitWorld);*/
+		nanosuitWorld->scale = Vec3(0.02f, 0.02f, 0.02f);
+		this->AddChild(nanosuitWorld);
 	}
 
 	~MyScene() {
@@ -79,13 +83,13 @@ public:
 		//delete someMaterial;
 		delete model1;
 		delete model2;
-		delete nanosuitWorld;
+		//delete nanosuitWorld;
 	}
 
 	void Update() {
 		time += 0.02f;
 		//model1->rotation = Euler::Quaternion::Euler(time, 1.0f, 0.0f, 0.0f);
-		model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);
+		//model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);
 		//model2->position = Euler::Vec3(sin(time), cos(time), 0);
 		//model2->rotation.y = time*0.5f;
 		//model2->position.x = sin(time);

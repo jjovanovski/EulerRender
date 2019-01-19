@@ -16,6 +16,7 @@
 #include "../graphics/MeshMaterial.h"
 #include "../graphics/Model.h"
 #include "../graphics/Vertex.h"
+#include "../graphics/Skybox.h"
 #include "../math/Vec2.h"
 #include "../math/Vec3.h"
 
@@ -29,6 +30,7 @@ namespace Euler {
 		static std::map<std::string, Material*> materials;
 		static std::map<std::string, MeshMaterial*> meshMaterials;
 		static std::map<std::string, Model*> models;
+		static std::map<std::string, Skybox*> skyboxes;
 
 		// helper function, decouple this code in the future
 		static void assimp_ProcessNode(std::string name, std::string dir, aiNode * node, const aiScene * scene, Model * model);
@@ -53,6 +55,8 @@ namespace Euler {
 
 		static Model * GetModel(std::string name);
 		static Model * GetModel(std::string name, std::string file);
+
+		static Skybox * GetSkybox(std::string name, std::vector<std::string> textures);
 	};
 
 }

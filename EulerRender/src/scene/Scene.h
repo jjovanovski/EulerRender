@@ -4,6 +4,7 @@
 
 #include "../API.h"
 #include "../graphics/Shader.h"
+#include "../graphics/Skybox.h"
 #include "../math//Transformation.h"
 #include "Component.h"
 #include "DirectionalLight.h"
@@ -13,9 +14,12 @@ namespace Euler {
 
 	class EULER_API Scene : public Component {
 	public:
+		Shader * shader;
+		Shader * skyboxShader;
+
 		DirectionalLight * directionalLight;
 		Camera * camera;
-		Shader * shader;
+		Skybox * skybox;
 
 		Scene();
 		virtual ~Scene();

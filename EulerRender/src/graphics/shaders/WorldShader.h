@@ -92,3 +92,34 @@ const char * WORLD_SHADER_FRAGMENT = "#version 330 core \n"
 ""
 "	return ambient + diffuse + specular;"
 "}";
+
+
+const char * WORLD_SKYBOX_SHADER_VERTEX = "#version 330 core \n"
+""
+"layout (location = 0) in vec3 in_pos;"
+"layout (location = 1) in vec3 in_normal;"
+"layout (location = 2) in vec2 in_uv;"
+"layout (location = 3) in vec3 in_tangent;"
+""
+"out vec3 fragmentUV;"
+""
+"uniform mat4 proj;"
+"uniform mat4 view;"
+""
+"void main() {"
+"	fragmentUV = normalize(in_pos);"
+"	gl_Position = proj * view * vec4(in_pos, 1.0);"
+"}";
+
+
+const char * WORLD_SKYBOX_SHADER_FRAGMENT = "#version 330 core \n"
+""
+"in vec3 fragmentUV;"
+""
+"out vec4 fragColor;"
+""
+"uniform samplerCube skybox;"
+""
+"void main() {"
+"	fragColor = texture(skybox, fragmentUV);"
+"}";

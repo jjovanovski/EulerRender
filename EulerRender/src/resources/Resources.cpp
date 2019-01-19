@@ -9,6 +9,7 @@ std::map<std::string, Texture*> Resources::textures;
 std::map<std::string, Material*> Resources::materials;
 std::map<std::string, MeshMaterial*> Resources::meshMaterials;
 std::map<std::string, Model*> Resources::models;
+std::map<std::string, Skybox*> Resources::skyboxes;
 
 Resources::Resources() {
 }
@@ -21,34 +22,61 @@ void Euler::Resources::Init() {
 }
 
 void Euler::Resources::Dispose() {
+	std::vector<Disposable*> disposables;
+
 	// dispose shaders
-	for (auto const& res : shaders) {
-		delete res.second;
+	for (const auto & res : shaders) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
 	}
 
 	// dispose meshes
-	for (auto const& res : meshes) {
-		delete res.second;
+	for (const auto & res : meshes) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
 	}
 
 	// dispose textures
-	for (auto const& res : textures) {
-		delete res.second;
+	for (const auto & res : textures) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
 	}
 
 	// dispose materials
-	for (auto const& res : materials) {
-		delete res.second;
+	for (const auto & res : materials) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
 	}
 
 	// dispose meshMaterials
-	for (auto const& res : meshMaterials) {
-		delete res.second;
+	for (const auto & res : meshMaterials) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
 	}
 
 	// dispose models
-	for (auto const& res : models) {
-		delete res.second;
+	for (const auto & res : models) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
+	}
+
+	// dispose skyboxes
+	for (const auto & res : skyboxes) {
+		if (res.second != NULL && res.second != nullptr)
+			disposables.push_back(res.second);
+	}
+	
+	shaders.clear();
+	meshes.clear();
+	textures.clear();
+	materials.clear();
+	meshMaterials.clear();
+	models.clear();
+	skyboxes.clear();
+
+	for (int i = 0; i < disposables.size(); i++) {
+		if(disposables[i] != NULL && disposables[i] != nullptr)
+			delete disposables[i];
 	}
 }
 
@@ -62,6 +90,9 @@ Shader * Euler::Resources::GetShader(std::string name, const char * vertexShader
 }
 
 Mesh * Euler::Resources::GetMesh(std::string name) {
+	if (meshes.find(name) != meshes.end())
+		return meshes[name];
+
 	Mesh * mesh = new Mesh();
 	meshes[name] = mesh;
 	return mesh;
@@ -78,18 +109,27 @@ Texture* Euler::Resources::GetTexture(std::string name, std::string path) {
 }
 
 Material * Euler::Resources::GetMaterial(std::string name) {
+	if (materials.find(name) != materials.end())
+		return materials[name];
+
 	Material * material = new Material();
 	materials[name] = material;
 	return material;
 }
 
 MeshMaterial * Euler::Resources::GetMeshMaterial(std::string name) {
+	if (meshMaterials.find(name) != meshMaterials.end())
+		return meshMaterials[name];
+
 	MeshMaterial * meshMaterial = new MeshMaterial();
 	meshMaterials[name] = meshMaterial;
 	return meshMaterial;
 }
 
 Model * Euler::Resources::GetModel(std::string name) {
+	if (models.find(name) != models.end())
+		return models[name];
+
 	Model * model = new Model();
 	models[name] = model;
 	return model;
@@ -132,7 +172,10 @@ MeshMaterial * Euler::Resources::assimp_ProcessMesh(std::string name, std::strin
 		Vertex vertex;
 		vertex.position = Vec3(aiMesh->mVertices[i].x, aiMesh->mVertices[i].y, aiMesh->mVertices[i].z);
 		vertex.normal = Vec3(aiMesh->mNormals[i].x, aiMesh->mNormals[i].y, aiMesh->mNormals[i].z);
-		vertex.tangent = Vec3(aiMesh->mTangents[i].x, aiMesh->mTangents[i].y, aiMesh->mTangents[i].z);
+		
+		if (aiMesh->mTangents) {
+			vertex.tangent = Vec3(aiMesh->mTangents[i].x, aiMesh->mTangents[i].y, aiMesh->mTangents[i].z);
+		}
 
 		if (aiMesh->mTextureCoords[0]) {
 			vertex.uv = Vec2(aiMesh->mTextureCoords[0][i].x, aiMesh->mTextureCoords[0][i].y);
@@ -153,19 +196,30 @@ MeshMaterial * Euler::Resources::assimp_ProcessMesh(std::string name, std::strin
 	if (aiMesh->mMaterialIndex >= 0) {
 		aiMaterial * aiMaterial = aiScene->mMaterials[aiMesh->mMaterialIndex];
 
-		// diffuse
-		aiString diffuseStr;
-		aiMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseStr);
-		std::string diffusePath = dir + "/" + diffuseStr.C_Str();
-		Texture * texture = Resources::GetTexture(diffusePath, diffusePath);
-		material->texture = texture;
+		aiColor3D diffuseColor(1, 1, 1);
+		aiColor3D specularColor(0, 0, 0);
+		aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, diffuseColor);
+		aiMaterial->Get(AI_MATKEY_COLOR_SPECULAR, specularColor);
+		material->diffuse = Vec3(diffuseColor.r, diffuseColor.g, diffuseColor.b);
+		material->specular = Vec3(specularColor.r, specularColor.g, specularColor.b);
 
-		// normal
-		aiString normalStr;
-		aiMaterial->GetTexture(aiTextureType_HEIGHT, 0, &normalStr);
-		std::string normalPath = dir + "/" + normalStr.C_Str();
-		Texture * normal = Resources::GetTexture(normalPath, normalPath);
-		material->normalmap = normal;
+		// diffuse texture
+		if (aiMaterial->GetTextureCount(aiTextureType_DIFFUSE)) {
+			aiString diffuseStr;
+			aiMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseStr);
+			std::string diffusePath = dir + "/" + diffuseStr.C_Str();
+			Texture * texture = Resources::GetTexture(diffusePath, diffusePath);
+			material->texture = texture;
+		}
+
+		// normal texture
+		if (aiMaterial->GetTextureCount(aiTextureType_HEIGHT) > 0) {
+			aiString normalStr;
+			aiMaterial->GetTexture(aiTextureType_HEIGHT, 0, &normalStr);
+			std::string normalPath = dir + "/" + normalStr.C_Str();
+			Texture * normal = Resources::GetTexture(normalPath, normalPath);
+			material->normalmap = normal;
+		}
 	}
 
 	mesh->Upload();
@@ -174,4 +228,13 @@ MeshMaterial * Euler::Resources::assimp_ProcessMesh(std::string name, std::strin
 	meshMaterial->mesh = mesh;
 	meshMaterial->material = material;
 	return meshMaterial;
+}
+
+Skybox * Euler::Resources::GetSkybox(std::string name, std::vector<std::string> textures) {
+	if (skyboxes.find(name) != skyboxes.end())
+		return skyboxes[name];
+
+	Skybox * skybox = new Skybox(textures);
+	skyboxes[name] = skybox;
+	return skybox;
 }

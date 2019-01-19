@@ -77,7 +77,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(SolutionDir)bin\Debug-x64\EulerRender\*.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
+      <Command>xcopy /y "$(SolutionDir)bin\Release-x64\EulerRender\*.dll" "$(SolutionDir)bin\Release-x64\Sandbox"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
