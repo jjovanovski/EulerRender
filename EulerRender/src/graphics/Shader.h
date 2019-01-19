@@ -31,6 +31,7 @@ namespace Euler {
 		// uniforms setters
 		void SetInt(std::string name, int val);
 		void SetFloat(std::string name, float val);
+		void SetVec2(std::string name, float x, float y);
 		void SetVec3(std::string name, float x, float y, float z);
 		void SetMat4(std::string name, Mat4* mat);
 

@@ -84,6 +84,9 @@ Shader * Euler::Resources::GetShader(std::string name, const char * vertexShader
 	if (shaders.find(name) != shaders.end())
 		return shaders[name];
 
+	if (vertexShaderSource == nullptr || fragmentShaderSource == nullptr)
+		return nullptr;
+
 	Shader * shader = new Shader(vertexShaderSource, fragmentShaderSource);
 	shaders[name] = shader;
 	return shader;

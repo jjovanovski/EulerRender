@@ -3,7 +3,9 @@
 
 #include "Euler.h"
 
-#define PI 3.1415926535
+#define PI 3.1415926535f
+#define DEG_RAD PI/180.0f
+#define RAD_DEG 180.0f/PI
 
 using namespace Euler;
 
@@ -21,16 +23,28 @@ public:
 	Euler::FreeCamera * freeCam;
 	float time = 0;
 
+	WorldModel * ground;
+
 	MyScene() {
 		Input::HideCursor();
 
+		// set-up the skybox
 		skybox = Resources::GetSkybox("sunset", {"sunset/xp.png", "sunset/xn.png", "sunset/yp.png", "sunset/yn.png", "sunset/zp.png", "sunset/zn.png"});
 
-		sphereMesh = new Euler::Sphere(30, 30);
+		// create plane mesh that can be shader between any objects
 		planeMesh = new Euler::Plane();
 
-		normalTexture = Resources::GetTexture("brick_normal", "brick_normal.jpg");
-		brickTexture = Resources::GetTexture("brick_diffuse", "brick_diffuse.jpg");
+		// add the free move camera as component
+		freeCam = new FreeCamera(camera);
+		this->AddChild(freeCam);
+
+		// create the scene
+		addGround();
+
+		/*sphereMesh = new Euler::Sphere(30, 30);
+
+		brickTexture = Resources::GetTexture("ground", "game/ground.jpg");
+		normalTexture = Resources::GetTexture("ground_normal", "game/ground_normal.jpg");
 
 		someMaterial = Resources::GetMaterial("someMaterial");
 		someMaterial->shader = shader;
@@ -73,33 +87,56 @@ public:
 		nanosuitWorld = new WorldModel();
 		nanosuitWorld->SetModel(nanosuit);
 		nanosuitWorld->scale = Vec3(0.02f, 0.02f, 0.02f);
-		this->AddChild(nanosuitWorld);
+		this->AddChild(nanosuitWorld);*/
 	}
 
 	~MyScene() {
-		delete sphereMesh;
 		delete planeMesh;
-		//delete brickTexture;
-		//delete someMaterial;
-		delete model1;
-		delete model2;
-		//delete nanosuitWorld;
+		delete ground;
+	}
+
+	void addGround() {
+		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/ground.jpg");
+		Texture * groundNormal = Resources::GetTexture("groundNormal", "game/ground_normal.jpg");
+
+		Material * groundMaterial = Resources::GetMaterial("groundMaterial");
+		groundMaterial->shader = Resources::GetShader("WorldShader");
+		groundMaterial->texture = groundDiffuse;
+		groundMaterial->normalmap = groundNormal;
+		groundMaterial->diffuseScale = Vec2(16, 16);
+		groundMaterial->normalScale = Vec2(16, 16);
+		groundMaterial->diffuse = Vec3(0.4f, 0.4f, 0.4f);
+		groundMaterial->specular = Vec3(0.4f, 0.4f, 0.4f);
+		groundMaterial->shininess = 10.0f;
+
+		MeshMaterial * groundMeshMaterial = Resources::GetMeshMaterial("groundMeshMaterial");
+		groundMeshMaterial->mesh = planeMesh;
+		groundMeshMaterial->material = groundMaterial;
+
+		Model * groundModel = Resources::GetModel("ground");
+		groundModel->AddDrawable(groundMeshMaterial);
+
+		ground = new WorldModel();
+		ground->SetModel(groundModel);
+		ground->scale = Vec3(50, 50, 50);
+		ground->rotation = Quaternion::Euler(-90 * DEG_RAD, 1, 0, 0);
+		AddChild(ground);
 	}
 
 	void Update() {
-		time += 0.02f;
+		/*time += 0.02f;
 		//model1->rotation = Euler::Quaternion::Euler(time, 1.0f, 0.0f, 0.0f);
 		//model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);
 		//model2->position = Euler::Vec3(sin(time), cos(time), 0);
 		//model2->rotation.y = time*0.5f;
 		//model2->position.x = sin(time);
-
+		
 		//std::cout << someMaterial->shininess << std::endl;
 		if (Input::GetKey(Key::NUMPAD_PLUS)) {
 			someMaterial->shininess += 1;
 		} else if (Input::GetKey(Key::NUMPAD_MINUS)) {
 			someMaterial->shininess -= 1;
-		}
+		}*/
 	}
 
 };

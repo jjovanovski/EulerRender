@@ -43,7 +43,7 @@ namespace Euler {
 		static void Init();
 		static void Dispose();
 
-		static Shader * GetShader(std::string name, const char* vertexShaderSource, const char* fragmentShaderSource);
+		static Shader * GetShader(std::string name, const char* vertexShaderSource = nullptr, const char* fragmentShaderSource = nullptr);
 
 		static Mesh * GetMesh(std::string name);
 

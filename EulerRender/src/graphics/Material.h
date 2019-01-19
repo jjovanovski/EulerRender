@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../API.h"
+#include "../math/Vec2.h"
 #include "../math/Vec3.h"
 #include "../graphics/Shader.h"
 #include "../graphics/Texture.h"
@@ -15,6 +16,9 @@ namespace Euler {
 		Texture * normalmap = nullptr;
 		Vec3 ambient, diffuse, specular;
 		float shininess;
+
+		Vec2 diffuseScale;
+		Vec2 normalScale;
 
 		Material(Vec3 diffuse = Vec3(1.0f, 1.0f, 1.0f), Vec3 specular = Vec3(0, 0, 0), float shininess = 32);
 		~Material();
