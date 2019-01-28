@@ -17,7 +17,7 @@ namespace Euler {
 		static Mat4 Scale(float x, float y, float z);
 		static Mat4 Rotate(float angle, float x, float y, float z);
 
-		static Mat4 Perspective();
+		static Mat4 Perspective(float near = 0.1f, float far = 100.0f, float fieldOfView = 60.0f);
 	};
 
 }

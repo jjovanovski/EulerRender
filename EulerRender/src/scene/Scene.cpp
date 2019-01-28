@@ -11,7 +11,7 @@ Scene::Scene() {
 	
 	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 1.0f);
 	camera = new Camera();
-	camera->position.z += 10;
+	camera->position.z += 5;
 }
 
 Scene::~Scene() {
@@ -39,8 +39,8 @@ void Scene::DrawScene() {
 	// camera settings
 	shader->SetVec3("cameraPos", camera->position.x, camera->position.y, camera->position.z);
 	shader->SetMat4("view", &camera->GetViewMatrix());
-	shader->SetMat4("proj", &Transformation::Perspective());
-
+	shader->SetMat4("proj", &Transformation::Perspective(camera->nearPlane, camera->farPlane, camera->fieldOfView));
+	
 	// draw skybox
 	if (skybox != NULL && skybox != nullptr) {
 		Mat4 skyboxViewMat = camera->GetViewMatrix();

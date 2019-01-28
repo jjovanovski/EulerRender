@@ -8,7 +8,7 @@ namespace Euler {
 
 	class EULER_API Plane : public Mesh {
 	public:
-		Plane();
+		Plane(int subplanes = 4);
 		~Plane();
 	};
 

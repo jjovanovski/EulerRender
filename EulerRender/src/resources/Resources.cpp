@@ -190,8 +190,10 @@ MeshMaterial * Euler::Resources::assimp_ProcessMesh(std::string name, std::strin
 	// process indices
 	for (int i = 0; i < aiMesh->mNumFaces; i++) {
 		aiFace face = aiMesh->mFaces[i];
-		for (int j = 0; j < face.mNumIndices; j++) {
-			mesh->indices.push_back(face.mIndices[j]);
+		if (face.mNumIndices%3 == 0) {
+			for (int j = 0; j < face.mNumIndices; j++) {
+				mesh->indices.push_back(face.mIndices[j]);
+			}
 		}
 	}
 

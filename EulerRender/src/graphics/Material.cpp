@@ -12,6 +12,9 @@ Material::Material(Vec3 diffuse, Vec3 specular, float shininess) {
 
 	normalScale.x = 1;
 	normalScale.y = 1;
+
+	specScale.x = 1;
+	specScale.y = 1;
 }
 
 Material::~Material() {
@@ -42,10 +45,20 @@ void Material::SetupShader() {
 		shader->SetInt("useNormalMap", 0);
 	}
 
+	if (specularmap != nullptr) {
+		glActiveTexture(GL_TEXTURE2);
+		specularmap->Bind();
+		shader->SetInt("specTex", 2);
+		shader->SetInt("useSpecMap", 1);
+	} else {
+		shader->SetInt("useSpecMap", 0);
+	}
+
 	shader->SetVec3("material.diffuse", diffuse.x, diffuse.y, diffuse.z);
 	shader->SetVec3("material.specular", specular.x, specular.y, specular.z);
 	shader->SetFloat("material.shininess", shininess);
 
 	shader->SetVec2("diffuseScale", diffuseScale.x, diffuseScale.y);
 	shader->SetVec2("normalScale", normalScale.x, normalScale.y);
+	shader->SetVec2("specScale", specScale.x, specScale.y);
 }

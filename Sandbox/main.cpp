@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <stdlib.h>  
+#include <stdio.h>  
+#include <time.h>
 
 #include "Euler.h"
 
@@ -21,7 +24,6 @@ public:
 	Euler::WorldModel * model2;
 	WorldModel * nanosuitWorld;
 	Euler::FreeCamera * freeCam;
-	float time = 0;
 
 	WorldModel * ground;
 
@@ -32,14 +34,21 @@ public:
 		skybox = Resources::GetSkybox("sunset", {"sunset/xp.png", "sunset/xn.png", "sunset/yp.png", "sunset/yn.png", "sunset/zp.png", "sunset/zn.png"});
 
 		// create plane mesh that can be shader between any objects
-		planeMesh = new Euler::Plane();
+		planeMesh = new Euler::Plane(16);
 
 		// add the free move camera as component
-		freeCam = new FreeCamera(camera);
+		freeCam = new FreeCamera(camera, 0.0015f, 0.0035f, 0.05f);
 		this->AddChild(freeCam);
+
+		//directionalLight->color = Vec3(1.0f, 1.0f, 0.4f);
+		directionalLight->direction = Vec3(-1, -0.2f, -1).Normalized();
+
+		// set the camera position a little above the ground
+		camera->position = Vec3(0, 0.2f, 0);
 
 		// create the scene
 		addGround();
+		addCar();
 
 		/*sphereMesh = new Euler::Sphere(30, 30);
 
@@ -90,24 +99,40 @@ public:
 		this->AddChild(nanosuitWorld);*/
 	}
 
+	WorldModel * car;
+	void addCar() {
+		Model * carmodel = Resources::GetModel("car1", "game/CreativeAssembly/objects/building.fbx");
+
+		car = new WorldModel();
+
+		car->SetModel(carmodel);
+		car->scale = Vec3(0.005f, 0.005f, 0.005f);
+		//car->rotation = Quaternion::Euler(PI / 2.0f, 1, 0, 0);
+		this->AddChild(car);
+	}
+
 	~MyScene() {
 		delete planeMesh;
 		delete ground;
+		delete car;
 	}
 
 	void addGround() {
-		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/ground.jpg");
+		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/groundDirty.jpg");
 		Texture * groundNormal = Resources::GetTexture("groundNormal", "game/ground_normal.jpg");
+		Texture * groundSpecular = Resources::GetTexture("groundSpecular", "game/ground_specular.jpg");
 
 		Material * groundMaterial = Resources::GetMaterial("groundMaterial");
 		groundMaterial->shader = Resources::GetShader("WorldShader");
 		groundMaterial->texture = groundDiffuse;
 		groundMaterial->normalmap = groundNormal;
-		groundMaterial->diffuseScale = Vec2(16, 16);
-		groundMaterial->normalScale = Vec2(16, 16);
-		groundMaterial->diffuse = Vec3(0.4f, 0.4f, 0.4f);
-		groundMaterial->specular = Vec3(0.4f, 0.4f, 0.4f);
-		groundMaterial->shininess = 10.0f;
+		groundMaterial->specularmap = groundSpecular;
+		groundMaterial->diffuseScale = Vec2(7, 7);
+		groundMaterial->normalScale = Vec2(7, 7);
+		groundMaterial->specScale = Vec2(7, 7);
+		groundMaterial->diffuse = Vec3(0.3f, 0.3f, 0.35f);
+		groundMaterial->specular = Vec3(1, 1, 1);
+		groundMaterial->shininess = 64;
 
 		MeshMaterial * groundMeshMaterial = Resources::GetMeshMaterial("groundMeshMaterial");
 		groundMeshMaterial->mesh = planeMesh;
@@ -118,12 +143,19 @@ public:
 
 		ground = new WorldModel();
 		ground->SetModel(groundModel);
-		ground->scale = Vec3(50, 50, 50);
+		ground->scale = Vec3(10, 10, 10);
 		ground->rotation = Quaternion::Euler(-90 * DEG_RAD, 1, 0, 0);
 		AddChild(ground);
 	}
 
 	void Update() {
+		if (Input::GetKey(Key::NUMPAD_PLUS)) {
+			std::cout << camera->fieldOfView << std::endl;
+			camera->fieldOfView += 0.1f;
+		} else if(Input::GetKey(Key::NUMPAD_MINUS)) {
+			camera->fieldOfView -= 0.1f;
+		}
+
 		/*time += 0.02f;
 		//model1->rotation = Euler::Quaternion::Euler(time, 1.0f, 0.0f, 0.0f);
 		//model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);

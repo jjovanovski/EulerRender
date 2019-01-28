@@ -45,14 +45,14 @@ Mat4 Transformation::Rotate(float angle, float x, float y, float z) {
 	return Quaternion::Euler(angle, x, y, z).GetMatrix();
 }
 
-Mat4 Transformation::Perspective() {
+Mat4 Transformation::Perspective(float near, float far, float fieldOfView) {
 	Mat4 perspective;
 	
-	float PI = 3.14f;
-	float fov = 45.0f;
+	float PI = 3.14159265359f;
+	float fov = fieldOfView;
 
-	float n = 0.1f;
-	float f = 100.0f;
+	float n = near;
+	float f = far;
 	float t = n * tan((PI / 180.0f) * fov / 2.0f);
 	float b = -t;
 	float r = t * 1.0f;
