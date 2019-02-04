@@ -28,19 +28,19 @@ void FreeCamera::Update() {
 	cameraRotX += mouseDeltaY;
 	cameraRotY += mouseDeltaX;
 	
-	camera->rotation = Quaternion::Euler(cameraRotY * mouseSensitivityY, 0, 1, 0) * Quaternion::Euler(cameraRotX * mouseSensitivityX, 1, 0, 0);
+	camera->SetRotation(Quaternion::Euler(cameraRotY * mouseSensitivityY, 0, 1, 0) * Quaternion::Euler(cameraRotX * mouseSensitivityX, 1, 0, 0));
 
 	// keyboard movement
 	Vec3 forwardDir = camera->Forward();
 	Vec3 rightDir = camera->Right();
 	if (Input::GetKey(Key::W)) {
-		camera->position -= Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed);
+		camera->SetPosition(camera->GetPosition() - Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed));
 	} else if (Input::GetKey(Key::S)) {
-		camera->position += Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed);
+		camera->SetPosition(camera->GetPosition() + Vec3(forwardDir.x * movementSpeed, forwardDir.y * movementSpeed, forwardDir.z * movementSpeed));
 	}
 	if (Input::GetKey(Key::A)) {
-		camera->position -= Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed);
+		camera->SetPosition(camera->GetPosition() - Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed));
 	} else if (Input::GetKey(Key::D)) {
-		camera->position += Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed);
+		camera->SetPosition(camera->GetPosition() + Vec3(rightDir.x * movementSpeed, rightDir.y * movementSpeed, rightDir.z * movementSpeed));
 	}
 }

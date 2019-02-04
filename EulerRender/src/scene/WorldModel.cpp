@@ -1,7 +1,7 @@
 #include "WorldModel.h"
 
 using namespace Euler;
-#include <iostream>
+
 WorldModel::WorldModel() : Component() {
 }
 
@@ -26,11 +26,4 @@ Model * WorldModel::GetModel() {
 
 void WorldModel::SetModel(Model * model) {
 	this->model = model;
-}
-
-Mat4 WorldModel::GetModelMatrix() {
-	return Transformation::Translate(position.x, position.y, position.z)
-		* rotation.GetMatrix()
-		* Transformation::Scale(scale.x, scale.y, scale.z)
-		* Transformation::Identity();
 }

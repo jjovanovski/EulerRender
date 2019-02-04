@@ -29,8 +29,6 @@ namespace Euler {
 
 		Model * GetModel();
 		void SetModel(Model * model);
-
-		Mat4 GetModelMatrix();
 	};
 
 }

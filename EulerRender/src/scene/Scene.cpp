@@ -11,7 +11,7 @@ Scene::Scene() {
 	
 	directionalLight = new DirectionalLight(Vec3(-1, -1, -1).Normalized(), Vec3(1, 1, 1), 1.0f);
 	camera = new Camera();
-	camera->position.z += 5;
+	camera->SetPosition(0, 0, 5);
 }
 
 Scene::~Scene() {
@@ -37,7 +37,7 @@ void Scene::DrawScene() {
 	// TODO: other lights settings
 
 	// camera settings
-	shader->SetVec3("cameraPos", camera->position.x, camera->position.y, camera->position.z);
+	shader->SetVec3("cameraPos", camera->GetX(), camera->GetY(), camera->GetZ());
 	shader->SetMat4("view", &camera->GetViewMatrix());
 	shader->SetMat4("proj", &Transformation::Perspective(camera->nearPlane, camera->farPlane, camera->fieldOfView));
 	
