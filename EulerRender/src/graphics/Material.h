@@ -12,11 +12,15 @@ namespace Euler {
 	class EULER_API Material : public Disposable {
 	public:
 		Shader * shader = nullptr;
+
 		Texture * texture = nullptr;
 		Texture * normalmap = nullptr;
 		Texture * specularmap = nullptr;
-		Vec3 ambient, diffuse, specular;
-		float shininess;
+
+		Vec3 ambient, diffuse, specular, emission;
+
+		float shininess = 2.0f;
+		float emissionAlpha = 0.0f;
 
 		Vec2 diffuseScale;
 		Vec2 normalScale;

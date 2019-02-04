@@ -47,58 +47,13 @@ public:
 		// create the scene
 		addGround();
 		addSemaphore();
-		//addCar();
-
-		/*sphereMesh = new Euler::Sphere(30, 30);
-
-		brickTexture = Resources::GetTexture("ground", "game/ground.jpg");
-		normalTexture = Resources::GetTexture("ground_normal", "game/ground_normal.jpg");
-
-		someMaterial = Resources::GetMaterial("someMaterial");
-		someMaterial->shader = shader;
-		someMaterial->texture = brickTexture;
-		someMaterial->normalmap = normalTexture;
-		someMaterial->diffuse = Euler::Vec3(1, 1, 1);
-		someMaterial->specular = Euler::Vec3(0.1f, 0.1f, 0.1f);
-		someMaterial->shininess = 30.0f;
-
-		MeshMaterial * sphereMeshMaterial = Resources::GetMeshMaterial("sphereMeshMaterial");
-		sphereMeshMaterial->mesh = sphereMesh;
-		sphereMeshMaterial->material = someMaterial;
-		Model * sphereModel = Resources::GetModel("sphereModel");
-		sphereModel->AddDrawable(sphereMeshMaterial);
-
-		MeshMaterial * planeMeshMaterial = Resources::GetMeshMaterial("planeMeshMaterial");
-		planeMeshMaterial->mesh = planeMesh;
-		planeMeshMaterial->material = someMaterial;
-		Model * planeModel = Resources::GetModel("planeModel");
-		planeModel->AddDrawable(planeMeshMaterial);
-
-		model1 = new Euler::WorldModel();
-		model1->rotation = Quaternion::Euler(-90.0f * 0.0174533f, 1, 0, 0);
-		model1->scale = Vec3(55, 55, 55);
-		model1->position.y = -1.0f;
-		model1->SetModel(planeModel);
-		this->AddChild(model1);
-
-		model2 = new Euler::WorldModel();
-		model2->position.x = 0;
-		model2->SetModel(sphereModel);
-		//this->AddChild(model2);
-		
-		freeCam = new FreeCamera(camera);
-		this->AddChild(freeCam);
-
-		directionalLight->intensity = 1.5f;
-
-		Model * nanosuit = Resources::GetModel("nanosuit", "man/GTP_BMan_Jack_07_Stg_Lsn_Adl_Ccs_Gry_Mgr.obj");
-		nanosuitWorld = new WorldModel();
-		nanosuitWorld->SetModel(nanosuit);
-		nanosuitWorld->scale = Vec3(0.02f, 0.02f, 0.02f);
-		this->AddChild(nanosuitWorld);*/
 	}
 
 	Component * semaphore;
+	WorldModel * semBox;
+	WorldModel * semRed;
+	WorldModel * semYellow;
+	WorldModel * semGreen;
 	void addSemaphore() {
 		Material * semBoxMat = Resources::GetMaterial("semBoxMat");
 		semBoxMat->diffuse = Vec3(0.1f, 0.1f, 0.1f);
@@ -108,15 +63,18 @@ public:
 
 		Material * semRedMat = Resources::GetMaterial("semRedMat");
 		semRedMat->shader = shader;
-		semRedMat->diffuse = Vec3(1.0f, 0.0f, 0.0f);
+		semRedMat->diffuse = Vec3(0.2f, 0.0f, 0.0f);
+		semRedMat->emission = Vec3(1.0f, 0.0f, 0.0f);
 
 		Material * semYellowMat = Resources::GetMaterial("semYellowMat");
 		semYellowMat->shader = shader;
-		semYellowMat->diffuse = Vec3(1.0f, 1.0f, 0.0f);
+		semYellowMat->diffuse = Vec3(0.2f, 0.2f, 0.0f);
+		semYellowMat->emission = Vec3(1.0f, 1.0f, 0.0f);
 
 		Material * semGreenMat = Resources::GetMaterial("semGreenMat");
 		semGreenMat->shader = shader;
-		semGreenMat->diffuse = Vec3(0.0f, 1.0f, 0.0f);
+		semGreenMat->diffuse = Vec3(0.0f, 0.2f, 0.0f);
+		semGreenMat->emission = Vec3(0.0f, 1.0f, 0.0f);
 
 		MeshMaterial * semBoxMM = Resources::GetMeshMaterial("semBoxMM");
 		semBoxMM->material = semBoxMat;
@@ -143,45 +101,35 @@ public:
 		Model * semGreenModel = Resources::GetModel("semGreenModel");
 		semGreenModel->AddDrawable(semGreenMM);
 
-		float scale = 0.3f;
+		float scale = 0.1f;
 
 		semaphore = new Component();
 		this->AddChild(semaphore);
 
-		WorldModel * semBox = new WorldModel();
+		semBox = new WorldModel();
 		semBox->SetModel(semBoxModel);
 		semBox->SetScale(Vec3(scale*1.2f, scale*3.5f, scale));
 		semBox->SetPosition(Vec3(0.0f, 0.0f, -scale/2.0f));
 		semaphore->AddChild(semBox);
 
-		WorldModel * semRed = new WorldModel();
+		semRed = new WorldModel();
 		semRed->SetModel(semRedModel);
 		semRed->SetScale(Vec3(scale, scale, scale));
 		semRed->SetPosition(Vec3(0, scale*2.1f, 0.0f));
 		semaphore->AddChild(semRed);
 
-		WorldModel * semYellow = new WorldModel();
+		semYellow = new WorldModel();
 		semYellow->SetModel(semYellowModel);
 		semYellow->SetScale(Vec3(scale, scale, scale));
 		semaphore->AddChild(semYellow);
 
-		WorldModel * semGreen = new WorldModel();
+		semGreen = new WorldModel();
 		semGreen->SetModel(semGreenModel);
 		semGreen->SetScale(Vec3(scale, scale, scale));
 		semGreen->SetPosition(Vec3(0, -scale * 2.1f, 0.0f));
 		semaphore->AddChild(semGreen);
-	}
 
-	WorldModel * car;
-	void addCar() {
-		Model * carmodel = Resources::GetModel("car1", "game/CreativeAssembly/objects/building.fbx");
-
-		car = new WorldModel();
-
-		car->SetModel(carmodel);
-		car->SetScale( Vec3(0.005f, 0.005f, 0.005f));
-		//car->rotation = Quaternion::Euler(PI / 2.0f, 1, 0, 0);
-		this->AddChild(car);
+		semaphore->SetPosition(0, 1, 0);
 	}
 
 	~MyScene() {
@@ -191,6 +139,10 @@ public:
 
 		delete ground;
 		delete semaphore;
+		delete semBox;
+		delete semRed;
+		delete semYellow;
+		delete semGreen;
 	}
 
 	void addGround() {
@@ -224,7 +176,46 @@ public:
 		AddChild(ground);
 	}
 
+	int color = 0;	// 0 = red, 1 = yellow, 2 = green
+	int counter = 0;
 	void Update() {
+		counter++;
+		if (counter == 60) {
+			counter = 0;
+			color = (color + 1) % 3;
+
+			if (color == 0) {
+				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(1, 0, 0);
+				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.7f;
+
+				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
+
+				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.0f;
+			}
+			else if (color == 1) {
+				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.0f;
+
+				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(1, 1, 0);
+				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.7f;
+
+				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.0f;
+			}
+			else {
+				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.0f;
+
+				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
+
+				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0, 1, 0);
+				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.7f;
+			}
+		}
+
 		Vec3 offset(0.1f, 0.1f, 0.1f);
 		if (Input::GetKey(Key::NUMPAD_PLUS)) {
 			semaphore->SetPosition(semaphore->GetX() + 0.1f, semaphore->GetY() + 0.1f, semaphore->GetZ() + 0.1f);
@@ -239,20 +230,6 @@ public:
 		else if(Input::GetKey(Key::NUMPAD_TWO)) {
 			semaphore->SetScale(semaphore->GetScaleX() - 0.01f, semaphore->GetScaleY() - 0.01f, semaphore->GetScaleZ() - 0.01f);
 		}
-
-		/*time += 0.02f;
-		//model1->rotation = Euler::Quaternion::Euler(time, 1.0f, 0.0f, 0.0f);
-		//model2->rotation = Euler::Quaternion::Euler(time, 0.0f, 1.0f, 1.0f);
-		//model2->position = Euler::Vec3(sin(time), cos(time), 0);
-		//model2->rotation.y = time*0.5f;
-		//model2->position.x = sin(time);
-		
-		//std::cout << someMaterial->shininess << std::endl;
-		if (Input::GetKey(Key::NUMPAD_PLUS)) {
-			someMaterial->shininess += 1;
-		} else if (Input::GetKey(Key::NUMPAD_MINUS)) {
-			someMaterial->shininess -= 1;
-		}*/
 	}
 
 };
