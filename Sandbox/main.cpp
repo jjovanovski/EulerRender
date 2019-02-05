@@ -185,34 +185,34 @@ public:
 			color = (color + 1) % 3;
 
 			if (color == 0) {
-				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(1, 0, 0);
-				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semRedMat")->diffuse = Vec3(1, 0, 0);
+				//Resources::GetMaterial("semRedMat")->emissionAlpha = 0.7f;
 
-				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
 
-				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.0f;
 			}
 			else if (color == 1) {
-				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.0f;
 
-				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(1, 1, 0);
-				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semYellowMat")->diffuse = Vec3(1, 1, 0);
+				//Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.7f;
 
-				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.0f;
 			}
 			else {
-				//Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semRedMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.0f;
 
-				//Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
+				Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
 
-				//Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0, 1, 0);
-				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0, 1, 0);
+				//Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.7f;
 			}
 		}
 
