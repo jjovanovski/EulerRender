@@ -35,9 +35,11 @@ void Scene::DrawScene() {
 	shader->SetFloat("directionalLight.intensity", directionalLight->intensity);
 
 	// camera settings
+    Mat4 viewMatrix = camera->GetViewMatrix();
+    Mat4 perspectiveMatrix = Transformation::Perspective(camera->nearPlane, camera->farPlane, camera->fieldOfView);
 	shader->SetVec3("cameraPos", camera->GetX(), camera->GetY(), camera->GetZ());
-	shader->SetMat4("view", &camera->GetViewMatrix());
-	shader->SetMat4("proj", &Transformation::Perspective(camera->nearPlane, camera->farPlane, camera->fieldOfView));
+	shader->SetMat4("view", &viewMatrix);
+	shader->SetMat4("proj", &perspectiveMatrix);
 	
 	// draw skybox
 	if (skybox != NULL && skybox != nullptr) {
@@ -48,7 +50,7 @@ void Scene::DrawScene() {
 
 		skyboxShader->Use();
 		skyboxShader->SetMat4("view", &skyboxViewMat);
-		skyboxShader->SetMat4("proj", &Transformation::Perspective());
+		skyboxShader->SetMat4("proj", &perspectiveMatrix);
 
 		skybox->Draw();
 	}
