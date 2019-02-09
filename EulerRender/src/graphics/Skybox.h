@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <stb/stb_image.h>
 #endif
 
 #include "../API.h"

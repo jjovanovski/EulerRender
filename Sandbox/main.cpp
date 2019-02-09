@@ -39,7 +39,7 @@ public:
 		this->AddChild(freeCam);
 
 		//directionalLight->color = Vec3(1.0f, 1.0f, 0.4f);
-		directionalLight->direction = Vec3(-1, -0.5f, -1).Normalized();
+		directionalLight->direction = Vec3(-0.5f, -0.5f, -.5f).Normalized();
 
 		// set the camera position a little above the ground
 		camera->SetPosition(Vec3(0, 0.2f, 3.0f));
@@ -47,6 +47,7 @@ public:
 		// create the scene
 		addGround();
 		addSemaphore();
+		addMaterialSpheres();
 	}
 
 	Component * semaphore;
@@ -129,7 +130,7 @@ public:
 		semGreen->SetPosition(Vec3(0, -scale * 2.1f, 0.0f));
 		semaphore->AddChild(semGreen);
 
-		semaphore->SetPosition(0, 1, 0);
+		semaphore->SetPosition(4.0f, 0.5f, 0);
 	}
 
 	~MyScene() {
@@ -143,12 +144,17 @@ public:
 		delete semRed;
 		delete semYellow;
 		delete semGreen;
+
+		delete diffuseSphere;
+		delete specSphere;
+		delete textureSphere;
+		delete normalSphere;
 	}
 
 	void addGround() {
-		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/sand/sand_diffuse.jpg");
-		Texture * groundNormal = Resources::GetTexture("groundNormal", "game/sand/sand_normal.jpg");
-		Texture * groundSpecular = Resources::GetTexture("groundSpecular", "game/sand/sand_roughness.jpg");
+		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/ground.jpg");
+		Texture * groundNormal = Resources::GetTexture("groundNormal", "game/ground_normal.jpg");
+		Texture * groundSpecular = Resources::GetTexture("groundSpecular", "game/ground_specular.jpg");
 
 		Material * groundMaterial = Resources::GetMaterial("groundMaterial");
 		groundMaterial->shader = Resources::GetShader("WorldShader");
@@ -158,9 +164,9 @@ public:
 		groundMaterial->diffuseScale = Vec2(17, 17);
 		groundMaterial->normalScale = Vec2(17, 17);
 		groundMaterial->specScale = Vec2(17, 17);
-		groundMaterial->diffuse = Vec3(0.6f, 0.6f, 0.6f);
+		groundMaterial->diffuse = Vec3(0.3f, 0.3f, 0.3f);
 		groundMaterial->specular = Vec3(1, 1, 1);
-		groundMaterial->shininess = 32;
+		groundMaterial->shininess = 128;
 
 		MeshMaterial * groundMeshMaterial = Resources::GetMeshMaterial("groundMeshMaterial");
 		groundMeshMaterial->mesh = planeMesh;
@@ -176,8 +182,86 @@ public:
 		AddChild(ground);
 	}
 
+	WorldModel * diffuseSphere;
+	WorldModel * specSphere;
+	WorldModel * textureSphere;
+	WorldModel * normalSphere;
+	void addMaterialSpheres() {
+		Material * diffuseMat = Resources::GetMaterial("diffuseMat");
+		diffuseMat->shader = shader;
+		diffuseMat->diffuse = Vec3(0.2f, 0.9f, 0.3f);
+		diffuseMat->specular = Vec3(0, 0, 0);
+
+		Material * specMat = Resources::GetMaterial("specMat");
+		specMat->shader = shader;
+		specMat->diffuse = Vec3(0.2f, 0.9f, 0.3f);
+		specMat->specular = Vec3(1.0f, 1.0f, 1.0f);
+		specMat->shininess = 64;
+
+		Material * textureMat = Resources::GetMaterial("textureMat");
+		textureMat->shader = shader;
+		textureMat->texture = Resources::GetTexture("brickTexture", "brick_diffuse.jpg");
+
+		Material * normalMapMat = Resources::GetMaterial("normalMapMat");
+		normalMapMat->shader = shader;
+		normalMapMat->texture = Resources::GetTexture("brickTexture", "brick_diffuse.jpg");
+		normalMapMat->normalmap = Resources::GetTexture("brickNormalMap", "brick_normal.jpg");
+
+
+		MeshMaterial * diffuseMM = Resources::GetMeshMaterial("diffuseMM");
+		diffuseMM->material = diffuseMat;
+		diffuseMM->mesh = sphereMesh;
+
+		MeshMaterial * specMM = Resources::GetMeshMaterial("specMM");
+		specMM->material = specMat;
+		specMM->mesh = sphereMesh;
+
+		MeshMaterial * textureMM = Resources::GetMeshMaterial("textureMM");
+		textureMM->material = textureMat;
+		textureMM->mesh = sphereMesh;
+
+		MeshMaterial * normalMM = Resources::GetMeshMaterial("normalMM");
+		normalMM->material = normalMapMat;
+		normalMM->mesh = sphereMesh;
+
+		Model * diffuseModel = Resources::GetModel("diffuseModel");
+		diffuseModel->AddDrawable(diffuseMM);
+		Model * specModel = Resources::GetModel("specModel");
+		specModel->AddDrawable(specMM);
+		Model * textureModel = Resources::GetModel("textureModel");
+		textureModel->AddDrawable(textureMM);
+		Model * normalModel = Resources::GetModel("normalModel");
+		normalModel->AddDrawable(normalMM);
+
+		diffuseSphere = new WorldModel();
+		diffuseSphere->SetModel(diffuseModel);
+		diffuseSphere->SetPosition(-2, 0.5f, 0);
+		diffuseSphere->SetScale(Vec3(0.5f, 0.5f, 0.5f));
+		this->AddChild(diffuseSphere);
+
+		specSphere = new WorldModel();
+		specSphere->SetModel(specModel);
+		specSphere->SetPosition(-0.75f, 0.5f, 0);
+		specSphere->SetScale(Vec3(0.5f, 0.5f, 0.5f));
+		this->AddChild(specSphere);
+
+		textureSphere = new WorldModel();
+		textureSphere->SetModel(textureModel);
+		textureSphere->SetPosition(0.75f, 0.5f, 0);
+		textureSphere->SetScale(Vec3(0.5f, 0.5f, 0.5f));
+		this->AddChild(textureSphere);
+
+		normalSphere = new WorldModel();
+		normalSphere->SetModel(normalModel);
+		normalSphere->SetPosition(2.0f, 0.5f, 0);
+		normalSphere->SetScale(Vec3(0.5f, 0.5f, 0.5f));
+		this->AddChild(normalSphere);
+	}
+
 	int color = 0;	// 0 = red, 1 = yellow, 2 = green
 	int counter = 0;
+	float frameCounter = 0;
+	bool transormationsActive = true;
 	void Update() {
 		counter++;
 		if (counter == 60) {
@@ -186,7 +270,7 @@ public:
 
 			if (color == 0) {
 				Resources::GetMaterial("semRedMat")->diffuse = Vec3(1, 0, 0);
-				//Resources::GetMaterial("semRedMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.7f;
 
 				Resources::GetMaterial("semYellowMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
@@ -199,7 +283,7 @@ public:
 				Resources::GetMaterial("semRedMat")->emissionAlpha = 0.0f;
 
 				Resources::GetMaterial("semYellowMat")->diffuse = Vec3(1, 1, 0);
-				//Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.7f;
 
 				Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0.1f, 0.1f, 0.1f);
 				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.0f;
@@ -212,26 +296,23 @@ public:
 				Resources::GetMaterial("semYellowMat")->emissionAlpha = 0.0f;
 
 				Resources::GetMaterial("semGreenMat")->diffuse = Vec3(0, 1, 0);
-				//Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.7f;
+				Resources::GetMaterial("semGreenMat")->emissionAlpha = 0.7f;
 			}
 		}
 
-		Vec3 offset(0.1f, 0.1f, 0.1f);
-		if (Input::GetKey(Key::NUMPAD_PLUS)) {
-			semaphore->SetPosition(semaphore->GetX() + 0.1f, semaphore->GetY() + 0.1f, semaphore->GetZ() + 0.1f);
-		} else if(Input::GetKey(Key::NUMPAD_MINUS)) {
-			semaphore->SetPosition(semaphore->GetX() - 0.1f, semaphore->GetY() - 0.1f, semaphore->GetZ() - 0.1f);
+		if (Input::GetKeyUp(Key::SPACE)) {
+			transormationsActive = !transormationsActive;
 		}
 
-		if (Input::GetKey(Key::NUMPAD_FIVE)) {
-			std::cout << semaphore->GetScaleX() << std::endl;
-			semaphore->SetScale(semaphore->GetScaleX() + 0.01f, semaphore->GetScaleY() + 0.01f, semaphore->GetScaleZ() + 0.01f);
-		}
-		else if(Input::GetKey(Key::NUMPAD_TWO)) {
-			semaphore->SetScale(semaphore->GetScaleX() - 0.01f, semaphore->GetScaleY() - 0.01f, semaphore->GetScaleZ() - 0.01f);
+		if (transormationsActive) {
+			frameCounter += 0.01f;
+			float scale = sin(frameCounter)*0.25f + 0.25f;
+			diffuseSphere->SetPosition(diffuseSphere->GetX(), sin(frameCounter)*0.25f + 0.75f, 0);
+			specSphere->SetScale(scale, scale, scale);
+			textureSphere->SetRotation(Quaternion::Euler(frameCounter, 1, 1, 0));
 		}
 	}
-
+	
 };
 
 int main(char** args, int argc) {

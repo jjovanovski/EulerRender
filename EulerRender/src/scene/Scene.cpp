@@ -34,8 +34,6 @@ void Scene::DrawScene() {
 	shader->SetVec3("directionalLight.color", directionalLight->color.x, directionalLight->color.y, directionalLight->color.z);
 	shader->SetFloat("directionalLight.intensity", directionalLight->intensity);
 
-	// TODO: other lights settings
-
 	// camera settings
 	shader->SetVec3("cameraPos", camera->GetX(), camera->GetY(), camera->GetZ());
 	shader->SetMat4("view", &camera->GetViewMatrix());
