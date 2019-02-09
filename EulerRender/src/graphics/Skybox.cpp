@@ -1,5 +1,7 @@
 #include "Skybox.h"
 
+#include <stb_image.h>
+
 #include <iostream>
 using namespace Euler;
 

@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
-#endif
-
 #include "../API.h"
 #include "../resources/Disposable.h"
 #include "../graphics/Mesh.h"

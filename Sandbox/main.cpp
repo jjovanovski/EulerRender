@@ -27,7 +27,7 @@ public:
 		Input::HideCursor();
 
 		// set-up the skybox
-		skybox = Resources::GetSkybox("sunset", {"sunset/xp.png", "sunset/xn.png", "sunset/yp.png", "sunset/yn.png", "sunset/zp.png", "sunset/zn.png"});
+		skybox = Resources::GetSkybox("sunset", {"resources/sunset/xp.png", "resources/sunset/xn.png", "resources/sunset/yp.png", "resources/sunset/yn.png", "resources/sunset/zp.png", "resources/sunset/zn.png"});
 
 		// create primitive meshes that can be shader between any objects
 		planeMesh = new Euler::Plane(16);
@@ -48,6 +48,7 @@ public:
 		addGround();
 		addSemaphore();
 		addMaterialSpheres();
+		addHumanModel();
 	}
 
 	Component * semaphore;
@@ -152,9 +153,9 @@ public:
 	}
 
 	void addGround() {
-		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "game/ground.jpg");
-		Texture * groundNormal = Resources::GetTexture("groundNormal", "game/ground_normal.jpg");
-		Texture * groundSpecular = Resources::GetTexture("groundSpecular", "game/ground_specular.jpg");
+		Texture * groundDiffuse = Resources::GetTexture("groundDiffuse", "resources/ground.jpg");
+		Texture * groundNormal = Resources::GetTexture("groundNormal", "resources/ground_normal.jpg");
+		Texture * groundSpecular = Resources::GetTexture("groundSpecular", "resources/ground_specular.jpg");
 
 		Material * groundMaterial = Resources::GetMaterial("groundMaterial");
 		groundMaterial->shader = Resources::GetShader("WorldShader");
@@ -200,12 +201,12 @@ public:
 
 		Material * textureMat = Resources::GetMaterial("textureMat");
 		textureMat->shader = shader;
-		textureMat->texture = Resources::GetTexture("brickTexture", "brick_diffuse.jpg");
+		textureMat->texture = Resources::GetTexture("brickTexture", "resources/brick_diffuse.jpg");
 
 		Material * normalMapMat = Resources::GetMaterial("normalMapMat");
 		normalMapMat->shader = shader;
-		normalMapMat->texture = Resources::GetTexture("brickTexture", "brick_diffuse.jpg");
-		normalMapMat->normalmap = Resources::GetTexture("brickNormalMap", "brick_normal.jpg");
+		normalMapMat->texture = Resources::GetTexture("brickTexture", "resources/brick_diffuse.jpg");
+		normalMapMat->normalmap = Resources::GetTexture("brickNormalMap", "resources/brick_normal.jpg");
 
 
 		MeshMaterial * diffuseMM = Resources::GetMeshMaterial("diffuseMM");
@@ -256,6 +257,17 @@ public:
 		normalSphere->SetPosition(2.0f, 0.5f, 0);
 		normalSphere->SetScale(Vec3(0.5f, 0.5f, 0.5f));
 		this->AddChild(normalSphere);
+	}
+
+	WorldModel * human;
+	void addHumanModel() {
+		Model * humanModel = Resources::GetModel("human", "resources/man/GTP_BMan_Jack_07_Stg_Lsn_Adl_Ccs_Gry_Mgr.obj");
+
+		human = new WorldModel();
+		human->SetModel(humanModel);
+		human->SetPosition(6, 0, 0);
+		human->SetScale(0.01f, 0.01f, 0.01f);
+		this->AddChild(human);
 	}
 
 	int color = 0;	// 0 = red, 1 = yellow, 2 = green
