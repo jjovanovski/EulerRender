@@ -2,7 +2,7 @@
 
 #include "../API.h"
 
-#include <glad\glad.h>
+#include <glad/glad.h>
 
 #include "Component.h"
 #include "../graphics/Mesh.h"
